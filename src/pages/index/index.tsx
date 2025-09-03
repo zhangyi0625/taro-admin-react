@@ -1,10 +1,14 @@
-import { Component, PropsWithChildren } from "react";
-import { connect } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { View, Button, Text } from "@tarojs/components";
-
 import { add, minus, asyncAdd } from "../../actions/counter";
-
 import "./index.scss";
+import {
+  useDidHide,
+  useDidShow,
+  usePullDownRefresh,
+  useReady,
+} from "@tarojs/taro";
 
 // #region 书写注意
 //
@@ -30,62 +34,72 @@ type PageDispatchProps = {
 
 type PageOwnProps = {};
 
-type PageState = {};
-
 type IProps = PageStateProps & PageDispatchProps & PageOwnProps;
 
 interface Index {
   props: IProps;
 }
 
-@connect(
-  ({ counter }) => ({
-    counter,
-  }),
-  (dispatch) => ({
-    add() {
-      dispatch(add());
-    },
-    dec() {
-      dispatch(minus());
-    },
-    asyncAdd() {
-      dispatch(asyncAdd());
-    },
-  })
-)
-class Index extends Component<PropsWithChildren> {
-  componentWillReceiveProps(nextProps) {
-    console.log(this.props, nextProps);
-  }
+const Index: React.FC = () => {
+  const dispatch = useDispatch();
 
-  componentWillUnmount() {}
+  const counter = useSelector((state) => state.counter);
 
-  componentDidShow() {}
+  const handleAdd = () => {
+    dispatch(add());
+  };
+  const handleReduce = () => {
+    dispatch(minus());
+  };
+  const handleAsync = () => {
+    dispatch(asyncAdd());
+  };
 
-  componentDidHide() {}
+  // 可以使用所有的 React Hooks
+  useEffect(() => {
+    console.log("useEffect");
+  }, []);
 
-  render() {
-    return (
-      <View className="index">
-        <Button className="add_btn" onClick={this.props.add}>
-          +++
-        </Button>
-        <Button className="dec_btn" onClick={this.props.dec}>
-          -
-        </Button>
-        <Button className="dec_btn" onClick={this.props.asyncAdd}>
-          async
-        </Button>
-        <View>
-          <Text>{this.props.counter.num}</Text>
-        </View>
-        <View>
-          <Text>Hello, World</Text>
-        </View>
+  // 对应 onReady
+  useReady(() => {
+    console.log("useReady");
+  });
+
+  // 对应 onShow
+  useDidShow(() => {
+    console.log("useDidShow");
+  });
+
+  // 对应 onHide
+  useDidHide(() => {
+    console.log("useDidHide");
+  });
+
+  // Taro 对所有小程序页面生命周期都实现了对应的自定义 React Hooks 进行支持
+  // 详情可查阅：【Hooks】
+  usePullDownRefresh(() => {
+    console.log("usePullDownRefresh");
+  });
+
+  return (
+    <View className="index">
+      <Button className="add_btn" onClick={handleAdd}>
+        +++
+      </Button>
+      <Button className="dec_btn" onClick={handleReduce}>
+        -
+      </Button>
+      <Button className="dec_btn" onClick={handleAsync}>
+        async
+      </Button>
+      <View>
+        <Text>{counter.num}</Text>
       </View>
-    );
-  }
-}
+      <View>
+        <Text>Hello, World</Text>
+      </View>
+    </View>
+  );
+};
 
 export default Index;
