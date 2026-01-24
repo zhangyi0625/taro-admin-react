@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>icon/邀请列表</title>
+    <g id="小程序" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="3-01我的" transform="translate(-24, -316)" fill-rule="nonzero" stroke="#1677FF" stroke-width="1.6">
+            <g id="编组备份" transform="translate(12, 301)">
+                <g id="icon/邀请列表" transform="translate(14, 18)">
+                    <path d="M8.99942488,16 C8.89572492,16 8.79629734,15.9590582 8.72336891,15.8859746 L2.26480925,9.38654487 C0.804013036,7.93956656 0,6.21664755 0,4.53591782 C0,1.82212083 1.81736852,0 4.52386734,0 C6.85078919,0 7.77212601,1.0250855 8.99942488,2.45496005 C10.2267238,1.0250855 11.1492108,0 13.4749824,0 C16.1814812,0 18,1.82326108 18,4.53591782 C18,6.21664755 17.1948367,7.93956656 15.7340405,9.38882537 L9.27663109,15.8836941 C9.20381978,15.9570888 9.10441591,15.9985583 9.00057512,15.9988595" id="路径"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
