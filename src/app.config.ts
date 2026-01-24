@@ -1,11 +1,39 @@
 export default defineAppConfig({
   pages: [
-    'pages/index/index'
+    "pages/index/index",
+    "pages/home/index",
+    "pages/memberUnit/index",
+    "pages/profile/index",
   ],
   window: {
-    backgroundTextStyle: 'light',
-    navigationBarBackgroundColor: '#fff',
-    navigationBarTitleText: 'WeChat',
-    navigationBarTextStyle: 'black'
-  }
-})
+    backgroundTextStyle: "light",
+    navigationBarBackgroundColor: "#fff",
+    navigationBarTitleText: "WeChat",
+    navigationBarTextStyle: "black",
+  },
+  tabBar: {
+    color: "#909399",
+    selectedColor: "#1677FF",
+    backgroundColor: "#FFFFFF",
+    list: [
+      {
+        pagePath: "pages/index/index",
+        text: "首页",
+        iconPath: "images/home.png",
+        selectedIconPath: "images/home-selected.png",
+      },
+      {
+        pagePath: "pages/memberUnit/index",
+        text: "会员单位",
+        iconPath: "images/memberUnit.png",
+        selectedIconPath: "images/memberUnit-selected.png",
+      },
+      {
+        pagePath: "pages/profile/index",
+        text: "我的",
+        iconPath: "images/profile.png",
+        selectedIconPath: "images/profile-selected.png",
+      },
+    ],
+  },
+});

@@ -2,12 +2,12 @@
   "miniprogramRoot": "./dist",
   "projectname": "my-taro-App",
   "description": "taro admin",
-  "appid": "touristappid",
+  "appid": "wx3f5e929c0e5e8189",
   "setting": {
     "urlCheck": true,
     "es6": false,
     "enhance": false,
-    "compileHotReLoad": false,
+    "compileHotReLoad": true,
     "postcss": false,
     "minified": false
   },

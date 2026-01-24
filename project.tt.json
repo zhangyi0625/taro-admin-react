@@ -1,7 +1,7 @@
 {
   "miniprogramRoot": "./",
   "projectname": "my-taro-App",
-  "appid": "testAppId",
+  "appid": "wx3f5e929c0e5e8189",
   "setting": {
     "es6": false,
     "minified": false
