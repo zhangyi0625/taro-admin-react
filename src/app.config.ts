@@ -4,6 +4,11 @@ export default defineAppConfig({
     "pages/home/index",
     "pages/memberUnit/index",
     "pages/profile/index",
+    "pages/login/index",
+    "pages/message/index",
+    "pages/affiliate/index",
+    "pages/collection/index",
+    "pages/dynamic/index",
   ],
   window: {
     backgroundTextStyle: "light",

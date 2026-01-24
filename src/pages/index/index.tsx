@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { View, Button, Text } from "@tarojs/components";
+import { View, Button, Text, Image } from "@tarojs/components";
 import { add, minus, asyncAdd } from "../../actions/counter";
 import "./index.scss";
 import {
@@ -9,6 +9,14 @@ import {
   usePullDownRefresh,
   useReady,
 } from "@tarojs/taro";
+import Taro from "@tarojs/taro";
+import BannerImg from "../../images/banner.png";
+import ArrowRight from "../../images/icon/arrow-icon.svg";
+import V1 from "../../images/icon/v2.png";
+import V2 from "../../images/icon/v2.png";
+import V3 from "../../images/icon/v3.png";
+import V4 from "../../images/icon/v4.png";
+import V5 from "../../images/icon/v5.png";
 
 // #region 书写注意
 //
@@ -40,25 +48,80 @@ interface Index {
   props: IProps;
 }
 
+type indexFunItemsType = {
+  title: string;
+  icon: string;
+  url: string;
+};
+
 const Index: React.FC = () => {
   const dispatch = useDispatch();
 
   const counter = useSelector((state) => state.counter);
 
-  const handleAdd = () => {
-    dispatch(add());
-  };
-  const handleReduce = () => {
-    dispatch(minus());
-  };
-  const handleAsync = () => {
-    dispatch(asyncAdd());
-  };
+  const levelOptions = [V1, V2, V3, V4, V5];
+
+  const [memberUnit, setMemberUnit] = useState<any>([
+    {
+      name: "浙江中外运有限公司",
+      level: 5,
+      logo: "",
+    },
+    {
+      name: "宁波港东南物流集团有限公司",
+      level: 4,
+      logo: "",
+    },
+    {
+      name: "宁波外运国际集装箱货运有限公司",
+      level: 3,
+      logo: "",
+    },
+    {
+      name: "宁波中远海运物流有限公司",
+      level: 2,
+      logo: "",
+    },
+  ]);
+
+  const FunItemsOptions: indexFunItemsType[] = [
+    {
+      title: "协会概况",
+      icon: ArrowRight,
+      url: "/pages/message/index",
+    },
+    {
+      title: "入会申请",
+      icon: ArrowRight,
+      url: "/pages/affiliate/index",
+    },
+    {
+      title: "咨询热线",
+      icon: ArrowRight,
+      url: "/pages/collection/index",
+    },
+  ];
 
   // 可以使用所有的 React Hooks
   useEffect(() => {
     console.log("useEffect");
+    init();
   }, []);
+
+  const init = async () => {
+    try {
+      const res = await Taro.request({
+        url: "https://www.zaicang.net/api/customer/query/rights/base/module?module=REALTIME_RATE",
+        method: "GET",
+        header: {
+          "Content-Type": "application/json",
+        },
+      });
+      setMemberUnit(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   // 对应 onReady
   useReady(() => {
@@ -83,20 +146,59 @@ const Index: React.FC = () => {
 
   return (
     <View className="index">
-      <Button className="add_btn" onClick={handleAdd}>
-        +++
-      </Button>
-      <Button className="dec_btn" onClick={handleReduce}>
-        -
-      </Button>
-      <Button className="dec_btn" onClick={handleAsync}>
-        async
-      </Button>
-      <View>
-        <Text>{counter.num}</Text>
+      <View className="index-title">
+        <View className="index-banner">
+          <Image src={BannerImg} className="banner" />
+        </View>
+        <View className="index-function">
+          {FunItemsOptions.map((item) => (
+            <View className="index-function-item" key={item.title}>
+              <Image src={item.icon} className="icon" />
+              <Text>{item.title}</Text>
+            </View>
+          ))}
+        </View>
       </View>
-      <View>
-        <Text>Hello, World</Text>
+      <View className="index-memberUnit">
+        <View className="index-memberUnit-title">
+          <Text>会员中心</Text>
+          <View
+            className="more"
+            onClick={() => Taro.navigateTo({ url: "/pages/memberUnit/index" })}
+          >
+            更多
+            <Image src={ArrowRight} className="arrow-icon" />
+          </View>
+        </View>
+        <View className="index-memberUnit-content">
+          {memberUnit.map((item) => (
+            <View className="index-memberUnit-item" key={item.name}>
+              <Image src={item.logo} className="logo" />
+              <View className="index-memberUnit-item-name">
+                <Text>{item.name}</Text>
+                <Text className="index-memberUnit-item-level" key={item.name}>
+                  <Image src={levelOptions[item.level - 1]} className="level" />
+                  <Text className="level-text">{item.level}</Text>
+                </Text>
+              </View>
+            </View>
+          ))}
+        </View>
+      </View>
+      <View className="index-dynamic">
+        <View
+          className="index-memberUnit-title"
+          style={{ borderBottom: "none" }}
+        >
+          <Text>行业动态</Text>
+          <View
+            className="more"
+            onClick={() => Taro.navigateTo({ url: "/pages/memberUnit/index" })}
+          >
+            更多
+            <Image src={ArrowRight} className="arrow-icon" />
+          </View>
+        </View>
       </View>
     </View>
   );

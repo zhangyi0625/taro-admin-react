@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="8px" height="12px" viewBox="0 0 8 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>icon/箭头/灰色跳转备份 5</title>
+    <g id="小程序" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="3-01我的" transform="translate(-343, -206)" fill="#909399">
+            <g id="编组" transform="translate(12, 186)">
+                <g id="icon/箭头/灰色跳转备份-5" transform="translate(332, 20.041)">
+                    <g id="编组" transform="translate(0, -0.041)">
+                        <polygon id="矩形" transform="translate(3.5, 3.541) rotate(-45) translate(-3.5, -3.541)" points="2.76391343 -0.672677294 4.16653508 -0.66108538 4.23608657 7.75464451 2.83346492 7.74305259"></polygon>
+                        <polygon id="矩形备份-5" transform="translate(3.5, 8.459) scale(1, -1) rotate(-45) translate(-3.5, -8.459)" points="2.76391343 4.24535549 4.16653508 4.25694741 4.23608657 12.6726773 2.83346492 12.6610854"></polygon>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
