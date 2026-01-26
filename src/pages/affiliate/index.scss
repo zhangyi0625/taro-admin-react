@@ -1,0 +1,84 @@
+.affiliate {
+  padding: 20rpx 0 80rpx;
+  background: #f5f7fa;
+  height: 100%;
+  &-baseInfo {
+    font-weight: 600;
+    font-size: 32rpx;
+    color: #303133;
+    background: #ffffff;
+    margin-top: 20rpx;
+    &-title {
+      padding: 30rpx 24rpx;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1rpx solid #edeff2;
+    }
+    .edit {
+      font-weight: 400;
+      font-size: 26rpx;
+      color: #909399;
+    }
+    &-content {
+      padding: 32rpx 24rpx;
+      font-weight: 400;
+      font-size: 28rpx;
+      color: #909399;
+      .logo {
+        width: 96rpx;
+        height: 96rpx;
+        object-fit: cover;
+        overflow: hidden;
+        margin-right: 24rpx;
+      }
+    }
+    &-remark {
+      font-weight: 600;
+      font-size: 28rpx;
+      color: #303133;
+      margin-bottom: 24rpx;
+    }
+    &-advantage {
+      padding: 32rpx 24rpx;
+      font-weight: 400;
+      font-size: 28rpx;
+      color: #303133;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      &-tag {
+        font-weight: 400;
+        font-size: 26rpx;
+        color: #ff6632;
+        padding: 10rpx 12rpx;
+        text-align: center;
+        border-radius: 14rpx;
+        background: #fff0eb;
+        margin-right: 8rpx;
+        margin-bottom: 8rpx;
+      }
+    }
+    &-member {
+      padding: 32rpx 24rpx;
+      display: flex;
+      align-items: center;
+      font-weight: 400;
+      font-size: 28rpx;
+      color: #303133;
+      border-bottom: 1rpx solid #edeff2;
+      .avatar {
+        width: 124rpx;
+        height: 124rpx;
+        object-fit: cover;
+        overflow: hidden;
+        margin-right: 24rpx;
+        border-radius: 50%;
+      }
+      .job {
+        color: #909399;
+        margin-left: 8rpx;
+      }
+    }
+  }
+}

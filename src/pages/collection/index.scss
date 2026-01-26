@@ -1,0 +1,58 @@
+.collection {
+  background: #f5f7fa;
+  height: 100vh;
+  &-item {
+    background: #ffffff;
+    padding: 38rpx 24rpx;
+    border-bottom: 1rpx solid #edeff2;
+    font-weight: 600;
+    font-size: 32rpx;
+    color: #303133;
+    &-logo {
+      width: 112rpx;
+      height: auto;
+    }
+    &-level {
+      width: 86rpx;
+      height: 36rpx;
+      margin-right: 8rpx;
+    }
+    &-level-text {
+      font-weight: 400;
+      font-size: 26rpx;
+      color: #909399;
+      margin-top: 8rpx;
+    }
+    &-content {
+      margin: 32rpx 0 20rpx;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-gap: 8rpx;
+      &-tag {
+        font-weight: 400;
+        font-size: 26rpx;
+        color: #ff6632;
+        padding: 10rpx 12rpx;
+        text-align: center;
+        border-radius: 14rpx;
+        background: #fff0eb;
+      }
+    }
+    &-img {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 8rpx;
+    }
+    &-img-item {
+      width: 100%;
+      height: 164rpx;
+      object-fit: cover;
+    }
+  }
+  &-item:first-child {
+    margin-top: 20rpx;
+  }
+  &-item:last-child {
+    border-bottom: none;
+  }
+}
