@@ -64,6 +64,7 @@
     "@babel/preset-react": "^7.24.1",
     "@tarojs/cli": "4.1.6",
     "@tarojs/vite-runner": "4.1.6",
+    "@types/node": "^25.0.10",
     "@types/react": "^18.0.0",
     "@typescript-eslint/eslint-plugin": "^6.2.0",
     "@typescript-eslint/parser": "^6.2.0",

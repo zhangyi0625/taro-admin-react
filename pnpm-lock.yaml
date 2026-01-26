@@ -19,7 +19,7 @@ importers:
         version: 4.1.6
       '@tarojs/plugin-framework-react':
         specifier: 4.1.6
-        version: 4.1.6(@tarojs/helper@4.1.6)(@tarojs/runtime@4.1.6)(@tarojs/shared@4.1.6)(@vitejs/plugin-react@4.7.0(vite@4.5.14(@types/node@24.3.0)(sass@1.92.0)(terser@5.44.0)))(react@18.3.1)(vite@4.5.14(@types/node@24.3.0)(sass@1.92.0)(terser@5.44.0))
+        version: 4.1.6(@tarojs/helper@4.1.6)(@tarojs/runtime@4.1.6)(@tarojs/shared@4.1.6)(@vitejs/plugin-react@4.7.0(vite@4.5.14(@types/node@25.0.10)(sass@1.92.0)(terser@5.44.0)))(react@18.3.1)(vite@4.5.14(@types/node@25.0.10)(sass@1.92.0)(terser@5.44.0))
       '@tarojs/plugin-platform-alipay':
         specifier: 4.1.6
         version: 4.1.6(@tarojs/service@4.1.6)(@tarojs/shared@4.1.6)
@@ -86,10 +86,13 @@ importers:
         version: 7.27.1(@babel/core@7.28.3)
       '@tarojs/cli':
         specifier: 4.1.6
-        version: 4.1.6(@types/node@24.3.0)
+        version: 4.1.6(@types/node@25.0.10)
       '@tarojs/vite-runner':
         specifier: 4.1.6
-        version: 4.1.6(@tarojs/runtime@4.1.6)(@types/babel__core@7.20.5)(postcss@8.5.6)(rollup@3.29.5)(terser@5.44.0)(typescript@5.9.2)(vite@4.5.14(@types/node@24.3.0)(sass@1.92.0)(terser@5.44.0))
+        version: 4.1.6(@tarojs/runtime@4.1.6)(@types/babel__core@7.20.5)(postcss@8.5.6)(rollup@3.29.5)(terser@5.44.0)(typescript@5.9.2)(vite@4.5.14(@types/node@25.0.10)(sass@1.92.0)(terser@5.44.0))
+      '@types/node':
+        specifier: ^25.0.10
+        version: 25.0.10
       '@types/react':
         specifier: ^18.0.0
         version: 18.3.24
@@ -101,7 +104,7 @@ importers:
         version: 6.21.0(eslint@8.57.1)(typescript@5.9.2)
       '@vitejs/plugin-react':
         specifier: ^4.1.0
-        version: 4.7.0(vite@4.5.14(@types/node@24.3.0)(sass@1.92.0)(terser@5.44.0))
+        version: 4.7.0(vite@4.5.14(@types/node@25.0.10)(sass@1.92.0)(terser@5.44.0))
       babel-preset-taro:
         specifier: 4.1.6
         version: 4.1.6(@babel/core@7.28.3)(@babel/plugin-transform-typescript@7.28.0(@babel/core@7.28.3))(@babel/preset-react@7.27.1(@babel/core@7.28.3))(react-refresh@0.11.0)
@@ -140,7 +143,7 @@ importers:
         version: 5.9.2
       vite:
         specifier: ^4.2.0
-        version: 4.5.14(@types/node@24.3.0)(sass@1.92.0)(terser@5.44.0)
+        version: 4.5.14(@types/node@25.0.10)(sass@1.92.0)(terser@5.44.0)
 
 packages:
 
@@ -1815,8 +1818,8 @@ packages:
   '@types/ms@2.1.0':
     resolution: {integrity: sha512-GsCCIZDE/p3i96vtEqx+7dBUGXrc7zeSK3wwPHIaRThS+9OhWIXRqzs4d6k1SVU8g91DrNRWxWUGhp5KXQb2VA==}
 
-  '@types/node@24.3.0':
-    resolution: {integrity: sha512-aPTXCrfwnDLj4VvXrm+UUCQjNEvJgNA8s5F1cvwQU+3KNltTOkBm1j30uNLyqqPNe7gE3KFzImYoZEfLhp4Yow==}
+  '@types/node@25.0.10':
+    resolution: {integrity: sha512-zWW5KPngR/yvakJgGOmZ5vTBemDoSqF3AcV/LrO5u5wTWyEAVVh+IT39G4gtyAkh3CtTZs8aX/yRM82OfzHJRg==}
 
   '@types/normalize-package-data@2.4.4':
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
@@ -4637,8 +4640,8 @@ packages:
   unbzip2-stream@1.4.3:
     resolution: {integrity: sha512-mlExGW4w71ebDJviH16lQLtZS32VKqsSfk80GCfUlwT/4/hNRFsoscrF/c++9xinkMzECL1uL9DDwXqFWkruPg==}
 
-  undici-types@7.10.0:
-    resolution: {integrity: sha512-t5Fy/nfn+14LuOc2KNYg75vZqClpAiqscVvMygNnlsHBFpSXdJaYtXMcdNLpl/Qvc3P2cB3s6lOV51nqsFq4ag==}
+  undici-types@7.16.0:
+    resolution: {integrity: sha512-Zz+aZWSj8LE6zoxD+xrjh4VfkIG8Ya6LvYkZqtUQGJPZjYl53ypCaUwWqo7eI0x66KBGeRo+mlBEkMSeSZ38Nw==}
 
   unicode-canonical-property-names-ecmascript@2.0.1:
     resolution: {integrity: sha512-dA8WbNeb2a6oQzAQ55YlT5vQAWGV9WXOsi3SskE3bcCdM0P4SDd+24zS/OCacdRq5BkdsRj9q3Pg6YyQoxIGqg==}
@@ -5859,12 +5862,12 @@ snapshots:
 
   '@humanwhocodes/object-schema@2.0.3': {}
 
-  '@inquirer/external-editor@1.0.1(@types/node@24.3.0)':
+  '@inquirer/external-editor@1.0.1(@types/node@25.0.10)':
     dependencies:
       chardet: 2.1.0
       iconv-lite: 0.6.3
     optionalDependencies:
-      '@types/node': 24.3.0
+      '@types/node': 25.0.10
 
   '@isaacs/balanced-match@4.0.1': {}
 
@@ -6139,7 +6142,7 @@ snapshots:
       '@tarojs/binding-linux-x64-gnu': 4.1.6
       '@tarojs/binding-win32-x64-msvc': 4.1.6
 
-  '@tarojs/cli@4.1.6(@types/node@24.3.0)':
+  '@tarojs/cli@4.1.6(@types/node@25.0.10)':
     dependencies:
       '@tarojs/binding': 4.1.6
       '@tarojs/helper': 4.1.6
@@ -6151,7 +6154,7 @@ snapshots:
       cli-highlight: 2.1.11
       download-git-repo: 3.0.2
       envinfo: 7.14.0
-      inquirer: 8.2.7(@types/node@24.3.0)
+      inquirer: 8.2.7(@types/node@25.0.10)
       latest-version: 5.1.0
       minimist: 1.2.8
       ora: 5.4.1
@@ -6331,7 +6334,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@tarojs/plugin-framework-react@4.1.6(@tarojs/helper@4.1.6)(@tarojs/runtime@4.1.6)(@tarojs/shared@4.1.6)(@vitejs/plugin-react@4.7.0(vite@4.5.14(@types/node@24.3.0)(sass@1.92.0)(terser@5.44.0)))(react@18.3.1)(vite@4.5.14(@types/node@24.3.0)(sass@1.92.0)(terser@5.44.0))':
+  '@tarojs/plugin-framework-react@4.1.6(@tarojs/helper@4.1.6)(@tarojs/runtime@4.1.6)(@tarojs/shared@4.1.6)(@vitejs/plugin-react@4.7.0(vite@4.5.14(@types/node@25.0.10)(sass@1.92.0)(terser@5.44.0)))(react@18.3.1)(vite@4.5.14(@types/node@25.0.10)(sass@1.92.0)(terser@5.44.0))':
     dependencies:
       '@tarojs/helper': 4.1.6
       '@tarojs/runtime': 4.1.6
@@ -6341,9 +6344,9 @@ snapshots:
       lodash: 4.17.21
       tslib: 2.8.1
     optionalDependencies:
-      '@vitejs/plugin-react': 4.7.0(vite@4.5.14(@types/node@24.3.0)(sass@1.92.0)(terser@5.44.0))
+      '@vitejs/plugin-react': 4.7.0(vite@4.5.14(@types/node@25.0.10)(sass@1.92.0)(terser@5.44.0))
       react: 18.3.1
-      vite: 4.5.14(@types/node@24.3.0)(sass@1.92.0)(terser@5.44.0)
+      vite: 4.5.14(@types/node@25.0.10)(sass@1.92.0)(terser@5.44.0)
 
   '@tarojs/plugin-platform-alipay@4.1.6(@tarojs/service@4.1.6)(@tarojs/shared@4.1.6)':
     dependencies:
@@ -6488,7 +6491,7 @@ snapshots:
       '@types/react': 18.3.24
       rollup: 3.29.5
 
-  '@tarojs/vite-runner@4.1.6(@tarojs/runtime@4.1.6)(@types/babel__core@7.20.5)(postcss@8.5.6)(rollup@3.29.5)(terser@5.44.0)(typescript@5.9.2)(vite@4.5.14(@types/node@24.3.0)(sass@1.92.0)(terser@5.44.0))':
+  '@tarojs/vite-runner@4.1.6(@tarojs/runtime@4.1.6)(@types/babel__core@7.20.5)(postcss@8.5.6)(rollup@3.29.5)(terser@5.44.0)(typescript@5.9.2)(vite@4.5.14(@types/node@25.0.10)(sass@1.92.0)(terser@5.44.0))':
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@babel/core': 7.28.3
@@ -6501,7 +6504,7 @@ snapshots:
       '@tarojs/runner-utils': 4.1.6
       '@tarojs/runtime': 4.1.6
       '@tarojs/shared': 4.1.6
-      '@vitejs/plugin-legacy': 4.1.1(terser@5.44.0)(vite@4.5.14(@types/node@24.3.0)(sass@1.92.0)(terser@5.44.0))
+      '@vitejs/plugin-legacy': 4.1.1(terser@5.44.0)(vite@4.5.14(@types/node@25.0.10)(sass@1.92.0)(terser@5.44.0))
       acorn-walk: 8.3.4
       autoprefixer: 10.4.21(postcss@8.5.6)
       babel-plugin-transform-taroapi: 4.1.6(@babel/core@7.28.3)
@@ -6524,8 +6527,8 @@ snapshots:
       regenerator-runtime: 0.11.1
       sax: 1.2.4
       stylelint: 16.23.1(typescript@5.9.2)
-      vite: 4.5.14(@types/node@24.3.0)(sass@1.92.0)(terser@5.44.0)
-      vite-plugin-static-copy: 0.17.1(vite@4.5.14(@types/node@24.3.0)(sass@1.92.0)(terser@5.44.0))
+      vite: 4.5.14(@types/node@25.0.10)(sass@1.92.0)(terser@5.44.0)
+      vite-plugin-static-copy: 0.17.1(vite@4.5.14(@types/node@25.0.10)(sass@1.92.0)(terser@5.44.0))
     transitivePeerDependencies:
       - '@swc/helpers'
       - '@types/babel__core'
@@ -6567,12 +6570,12 @@ snapshots:
 
   '@types/fs-extra@8.1.5':
     dependencies:
-      '@types/node': 24.3.0
+      '@types/node': 25.0.10
 
   '@types/glob@7.2.0':
     dependencies:
       '@types/minimatch': 6.0.0
-      '@types/node': 24.3.0
+      '@types/node': 25.0.10
 
   '@types/hoist-non-react-statics@3.3.7(@types/react@18.3.24)':
     dependencies:
@@ -6585,7 +6588,7 @@ snapshots:
 
   '@types/keyv@3.1.4':
     dependencies:
-      '@types/node': 24.3.0
+      '@types/node': 25.0.10
 
   '@types/lodash.debounce@4.0.9':
     dependencies:
@@ -6601,9 +6604,9 @@ snapshots:
 
   '@types/ms@2.1.0': {}
 
-  '@types/node@24.3.0':
+  '@types/node@25.0.10':
     dependencies:
-      undici-types: 7.10.0
+      undici-types: 7.16.0
 
   '@types/normalize-package-data@2.4.4': {}
 
@@ -6611,7 +6614,7 @@ snapshots:
 
   '@types/postcss-url@10.0.4':
     dependencies:
-      '@types/node': 24.3.0
+      '@types/node': 25.0.10
       postcss: 8.5.6
 
   '@types/prop-types@15.7.15': {}
@@ -6630,7 +6633,7 @@ snapshots:
 
   '@types/responselike@1.0.3':
     dependencies:
-      '@types/node': 24.3.0
+      '@types/node': 25.0.10
 
   '@types/sass@1.45.0':
     dependencies:
@@ -6726,7 +6729,7 @@ snapshots:
 
   '@ungap/structured-clone@1.3.0': {}
 
-  '@vitejs/plugin-legacy@4.1.1(terser@5.44.0)(vite@4.5.14(@types/node@24.3.0)(sass@1.92.0)(terser@5.44.0))':
+  '@vitejs/plugin-legacy@4.1.1(terser@5.44.0)(vite@4.5.14(@types/node@25.0.10)(sass@1.92.0)(terser@5.44.0))':
     dependencies:
       '@babel/core': 7.28.3
       '@babel/preset-env': 7.28.3(@babel/core@7.28.3)
@@ -6736,11 +6739,11 @@ snapshots:
       regenerator-runtime: 0.13.11
       systemjs: 6.15.1
       terser: 5.44.0
-      vite: 4.5.14(@types/node@24.3.0)(sass@1.92.0)(terser@5.44.0)
+      vite: 4.5.14(@types/node@25.0.10)(sass@1.92.0)(terser@5.44.0)
     transitivePeerDependencies:
       - supports-color
 
-  '@vitejs/plugin-react@4.7.0(vite@4.5.14(@types/node@24.3.0)(sass@1.92.0)(terser@5.44.0))':
+  '@vitejs/plugin-react@4.7.0(vite@4.5.14(@types/node@25.0.10)(sass@1.92.0)(terser@5.44.0))':
     dependencies:
       '@babel/core': 7.28.3
       '@babel/plugin-transform-react-jsx-self': 7.27.1(@babel/core@7.28.3)
@@ -6748,7 +6751,7 @@ snapshots:
       '@rolldown/pluginutils': 1.0.0-beta.27
       '@types/babel__core': 7.20.5
       react-refresh: 0.17.0
-      vite: 4.5.14(@types/node@24.3.0)(sass@1.92.0)(terser@5.44.0)
+      vite: 4.5.14(@types/node@25.0.10)(sass@1.92.0)(terser@5.44.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -8306,9 +8309,9 @@ snapshots:
 
   ini@1.3.8: {}
 
-  inquirer@8.2.7(@types/node@24.3.0):
+  inquirer@8.2.7(@types/node@25.0.10):
     dependencies:
-      '@inquirer/external-editor': 1.0.1(@types/node@24.3.0)
+      '@inquirer/external-editor': 1.0.1(@types/node@25.0.10)
       ansi-escapes: 4.3.2
       chalk: 4.1.2
       cli-cursor: 3.1.0
@@ -9925,7 +9928,7 @@ snapshots:
       buffer: 5.7.1
       through: 2.3.8
 
-  undici-types@7.10.0: {}
+  undici-types@7.16.0: {}
 
   unicode-canonical-property-names-ecmascript@2.0.1: {}
 
@@ -9985,21 +9988,21 @@ snapshots:
 
   validate-npm-package-name@5.0.1: {}
 
-  vite-plugin-static-copy@0.17.1(vite@4.5.14(@types/node@24.3.0)(sass@1.92.0)(terser@5.44.0)):
+  vite-plugin-static-copy@0.17.1(vite@4.5.14(@types/node@25.0.10)(sass@1.92.0)(terser@5.44.0)):
     dependencies:
       chokidar: 3.6.0
       fast-glob: 3.3.3
       fs-extra: 11.3.1
       picocolors: 1.1.1
-      vite: 4.5.14(@types/node@24.3.0)(sass@1.92.0)(terser@5.44.0)
+      vite: 4.5.14(@types/node@25.0.10)(sass@1.92.0)(terser@5.44.0)
 
-  vite@4.5.14(@types/node@24.3.0)(sass@1.92.0)(terser@5.44.0):
+  vite@4.5.14(@types/node@25.0.10)(sass@1.92.0)(terser@5.44.0):
     dependencies:
       esbuild: 0.18.20
       postcss: 8.5.6
       rollup: 3.29.5
     optionalDependencies:
-      '@types/node': 24.3.0
+      '@types/node': 25.0.10
       fsevents: 2.3.3
       sass: 1.92.0
       terser: 5.44.0
