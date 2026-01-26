@@ -10,7 +10,9 @@
     color: #303133;
     &-logo {
       width: 112rpx;
-      height: auto;
+      height: 112rpx;
+      object-fit: cover;
+      margin-right: 20rpx;
     }
     &-level {
       width: 86rpx;

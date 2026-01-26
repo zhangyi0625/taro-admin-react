@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="12px" height="6px" viewBox="0 0 12 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>icon/箭头/展开</title>
+    <g id="小程序" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="2-01会员单位列表" transform="translate(-230, -265)" fill="#909399">
+            <g id="编组-2" transform="translate(0, 142)">
+                <g id="icon/箭头/展开" transform="translate(236, 126) scale(1, -1) translate(-236, -126)translate(231.7574, 123.5251)">
+                    <g id="编组" transform="translate(4.2426, 2.4749) rotate(-90) translate(-4.2426, -2.4749)translate(1.7678, -1.7678)">
+                        <polygon id="矩形" transform="translate(2.4749, 2.4749) rotate(-45) translate(-2.4749, -2.4749)" points="1.97487373 -0.525126266 2.97487373 -0.525126266 2.97487373 5.47487373 1.97487373 5.47487373"></polygon>
+                        <polygon id="矩形备份-5" transform="translate(2.4749, 6.0104) scale(1, -1) rotate(-45) translate(-2.4749, -6.0104)" points="1.97487373 3.01040764 2.97487373 3.01040764 2.97487373 9.01040764 1.97487373 9.01040764"></polygon>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
