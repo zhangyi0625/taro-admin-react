@@ -8,6 +8,19 @@
   flex-direction: column;
 }
 
+.flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.gray {
+  color: #303133;
+}
+
+.light-gray {
+  color: #909399;
+}
+
 .arrow-icon {
   width: 12rpx;
   height: 24rpx;
