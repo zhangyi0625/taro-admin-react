@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="52px" height="52px" viewBox="0 0 52 52" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>咨询热线</title>
+    <defs>
+        <linearGradient x1="131.883955%" y1="-77.695999%" x2="34.5703837%" y2="89.2776142%" id="linearGradient-1">
+            <stop stop-color="#7AEEDC" offset="0%"></stop>
+            <stop stop-color="#45D9B6" offset="100%"></stop>
+        </linearGradient>
+        <path d="M34.5714286,34.9410245 L26.9342857,34.9410245 L19.1428571,40 L19.1428571,34.9410245 L17.4285714,34.9410245 C15.5350237,34.9410245 14,33.3991726 14,31.4972019 L14,19.4438226 C14,17.5418519 15.5350237,16 17.4285714,16 L34.5714286,16 C36.4649763,16 38,17.5418519 38,19.4438226 L38,31.4972019 C38,33.3991726 36.4649763,34.9410245 34.5714286,34.9410245 Z M18.2857143,28.0533793 L28.5714286,28.0533793 C29.0448155,28.0533793 29.4285714,27.6679163 29.4285714,27.1924236 C29.4285714,26.7169309 29.0448155,26.3314679 28.5714286,26.3314679 L18.2857143,26.3314679 C17.8123274,26.3314679 17.4285714,26.7169309 17.4285714,27.1924236 C17.4285714,27.6679163 17.8123274,28.0533793 18.2857143,28.0533793 Z M33.7142857,21.165734 L18.2857143,21.165734 C17.8123274,21.165734 17.4285714,21.5511969 17.4285714,22.0266896 C17.4285714,22.5021823 17.8123274,22.8876453 18.2857143,22.8876453 L33.7142857,22.8876453 C34.1876726,22.8876453 34.5714286,22.5021823 34.5714286,22.0266896 C34.5714286,21.5511969 34.1876726,21.165734 33.7142857,21.165734 Z" id="path-2"></path>
+        <filter x="-45.8%" y="-29.2%" width="191.7%" height="191.7%" filterUnits="objectBoundingBox" id="filter-3">
+            <feOffset dx="0" dy="4" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="3" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.230369415   0 0 0 0 0.695935236   0 0 0 0 0.588253345  0 0 0 0.246558129 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="小程序" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="1-01首页" transform="translate(-297, -294)">
+            <g id="功能区" transform="translate(24, 294)">
+                <g id="咨询热线" transform="translate(273, 0)">
+                    <rect id="矩形备份-9" fill="url(#linearGradient-1)" x="0" y="0" width="52" height="52" rx="20"></rect>
+                    <g id="形状" fill-rule="nonzero">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-3)" xlink:href="#path-2"></use>
+                        <use fill="#FFFFFF" xlink:href="#path-2"></use>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
