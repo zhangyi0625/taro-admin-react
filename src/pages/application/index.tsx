@@ -1,5 +1,6 @@
 import { View, Text } from "@tarojs/components";
 import "./index.scss";
+import Taro from "@tarojs/taro";
 
 const Application: React.FC = () => {
   const processSteps = [
@@ -55,7 +56,14 @@ const Application: React.FC = () => {
       </View>
 
       <View className="application-fixed">
-        <View className="btn">提交申请</View>
+        <View
+          className="btn"
+          onClick={() =>
+            Taro.navigateTo({ url: "/pages/application/ApplicationForm/index" })
+          }
+        >
+          提交申请
+        </View>
       </View>
     </View>
   );

@@ -13,8 +13,11 @@ export default defineAppConfig({
     "pages/collection/index",
     "pages/dynamic/index",
     "pages/unitGeneral/index",
+    "pages/application/ApplicationForm/index",
     "pages/consulting/index",
     "pages/application/index",
+    "pages/webview/index",
+    "pages/industryDynamics/index",
   ],
   window: {
     backgroundTextStyle: "light",
