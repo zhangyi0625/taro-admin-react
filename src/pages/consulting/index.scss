@@ -1,0 +1,31 @@
+.consulting {
+  height: 100%;
+  background: #ffffff;
+  padding: 20rpx 0 80rpx;
+  &-content {
+    margin: 240rpx 112rpx 0;
+    .bg {
+      width: 526rpx;
+      height: 360rpx;
+      object-fit: cover;
+    }
+    .phone {
+      font-weight: 600;
+      font-size: 32rpx;
+      color: #303133;
+      padding: 40rpx 0;
+      text-align: center;
+    }
+    .btn {
+      height: 88rpx;
+      background: #1677ff;
+      border-radius: 12rpx;
+      font-weight: 500;
+      font-size: 32rpx;
+      color: #ffffff;
+      text-align: center;
+      padding: 6rpx 0;
+      width: 100%;
+    }
+  }
+}

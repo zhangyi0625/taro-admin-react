@@ -1,0 +1,100 @@
+.application {
+  padding: 0 32rpx;
+  background-color: #ffffff;
+  position: relative;
+  .process-section {
+    margin-top: 68rpx;
+    .process-title {
+      font-weight: 600;
+      font-size: 32rpx;
+      color: #303133;
+      margin-bottom: 46rpx;
+    }
+    .process-steps {
+      position: relative;
+      .process-step {
+        display: flex;
+        margin-bottom: 30px;
+        position: relative;
+        .step-number {
+          width: 68rpx;
+          height: 68rpx;
+          background-color: #1677ff;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: 600;
+          font-size: 28rpx;
+          color: #ffffff;
+          flex-shrink: 0;
+          margin-right: 20px;
+        }
+      }
+      .step-content {
+        flex: 1;
+        .step-name {
+          display: block;
+          font-size: 26rpx;
+          font-weight: 600;
+          color: #303133;
+          margin-bottom: 8px;
+        }
+        .step-desc {
+          font-weight: 400;
+          font-size: 28rpx;
+          color: #606266;
+        }
+      }
+    }
+  }
+  &-fixed {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    height: 172rpx;
+    background: #ffffff;
+    box-shadow: 0rpx -2rpx 4rpx 0rpx rgba(0, 0, 0, 0.08);
+    padding: 24rpx;
+    .btn {
+      height: 88rpx;
+      line-height: 88rpx;
+      background: #fa8c16;
+      border-radius: 12rpx;
+      font-weight: 500;
+      font-size: 32rpx;
+      color: #ffffff;
+      text-align: center;
+      padding: 6rpx 0;
+      width: 100%;
+    }
+  }
+}
+
+.process-step.first-step {
+  margin-bottom: 40px;
+}
+
+.process-step.first-step .step-line {
+  bottom: -40px;
+}
+
+.process-step.last-step {
+  margin-bottom: 0;
+}
+
+.step-line {
+  position: absolute;
+  left: 20px;
+  top: 40px;
+  bottom: -30px;
+  width: 2px;
+  background-color: #e5e5e5;
+  z-index: 0;
+}
+
+.process-step.last-step .step-line {
+  display: none;
+}

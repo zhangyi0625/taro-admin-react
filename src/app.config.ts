@@ -12,6 +12,9 @@ export default defineAppConfig({
     "pages/affiliate/index",
     "pages/collection/index",
     "pages/dynamic/index",
+    "pages/unitGeneral/index",
+    "pages/consulting/index",
+    "pages/application/index",
   ],
   window: {
     backgroundTextStyle: "light",
