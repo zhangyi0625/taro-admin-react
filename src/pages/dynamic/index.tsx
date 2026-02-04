@@ -1,28 +1,32 @@
 import { View, Text, Image } from "@tarojs/components";
 import "./index.scss";
-import { useEffect, useState } from "react";
-import Taro from "@tarojs/taro";
+import { useState } from "react";
+import Taro, { useLoad } from "@tarojs/taro";
+import { getCustomerMessageList } from "../../service/dynamic/dynamicApi";
+import AvatarIcon from "../../images/icon/avatar.svg";
 
 const Dynamic: React.FC = () => {
-  const [dynamic, setDynamic] = useState<any>(["1", "2"]);
+  const [dynamic, setDynamic] = useState<any>([]);
 
-  useEffect(() => {
-    init();
-  }, []);
+  const [direction, setDirection] = useState<number>(1);
 
-  const init = async () => {
+  useLoad((options) => {
+    init(options.direction || "");
+    setDirection(Number(options.direction || 1));
+    Taro.setNavigationBarTitle({
+      title: Number(options.direction) === 1 ? "发出的留言" : "收到的留言",
+    });
+  });
+
+  const init = async (direction?: number) => {
     Taro.showLoading({
       title: "加载中",
     });
     try {
-      const res = await Taro.request({
-        url: "/api/dynamic/query",
-        method: "GET",
-        header: {
-          "Content-Type": "application/json",
-        },
+      const res: any = await getCustomerMessageList({
+        direction: Number(direction),
       });
-      setDynamic(res.data || [""]);
+      setDynamic(res || []);
       setTimeout(function () {
         Taro.hideLoading();
       }, 2000);
@@ -38,27 +42,30 @@ const Dynamic: React.FC = () => {
       {dynamic.map((item: any) => (
         <View key={item.id} className="dynamic-item">
           <View className="inline-flex">
-            <Image className="dynamic-item-avatar" src={item.avatar} />
+            <Image
+              className="dynamic-item-avatar"
+              src={item.receiverAvatar ?? AvatarIcon}
+            />
             <View className="flex-col">
               <View>
-                后莎姬
+                {item.receiverName}
                 <Text style={{ color: "##FA8C16", marginLeft: "12rpx" }}>
-                  市场部经理
+                  {item.senderPosition}
                 </Text>
               </View>
               <View
                 className="dynamic-item-time"
                 style={{ marginBottom: "none" }}
               >
-                {"浙江中外运有限公司"}
+                {item.senderCompanyName}
               </View>
             </View>
           </View>
-          <View className="dynamic-item-phone">电话：13188888888</View>
-          <View className="dynamic-item-content">
-            我们长期有电子产品需要发往美国，想了解一下贵司的海运和清关方案，不知您方便详细介绍一下吗？
-          </View>
-          <View className="dynamic-item-time">时间：2026-01-12 09:00:00</View>
+          {direction === 2 && (
+            <View className="dynamic-item-phone">电话：{item.phone}</View>
+          )}
+          <View className="dynamic-item-content">{item.content}</View>
+          <View className="dynamic-item-time">时间：{item.createTime}</View>
         </View>
       ))}
     </View>

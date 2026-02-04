@@ -1,0 +1,16 @@
+.memberUnitPicture {
+  height: 100%;
+  background: #fff;
+  padding: 32rpx 24rpx;
+  &-image {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 22rpx;
+    .image {
+      width: 100%;
+      height: 339rpx;
+      border-radius: 12rpx;
+      overflow: hidden;
+    }
+  }
+}

@@ -1,4 +1,5 @@
 import httpRequest from "../../utils/http";
+import type { PortAdvantageSearchParams } from "./advantageModel";
 
 /**
  * 获取业务优势
@@ -10,15 +11,20 @@ export const getBusinessAdvantage = () => {
 /**
  * 获取起运港、目的港优势
  */
-export const getPortAdvantage = (params: { tag: string }) => {
-  return httpRequest.get("/api/customer/supplier/advantage/product", {
-    params,
-  });
+export const getPortAdvantage = (params: PortAdvantageSearchParams) => {
+  return httpRequest.get("/api/app/open/port", params);
 };
 
 /**
  * 获取航线优势
  */
-export const getRouteAdvantage = () => {
-  return httpRequest.get("/api/customer/supplier/advantage/route");
+export const getRouteAdvantage = (params?: { parentId?: string }) => {
+  return httpRequest.get("/api/app/open/route", params);
+};
+
+/**
+ * 获取船东优势
+ */
+export const getCarrierAdvantage = () => {
+  return httpRequest.get("/api/app/open/carrier");
 };

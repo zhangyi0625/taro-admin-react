@@ -1,0 +1,42 @@
+.unitGeneral {
+  height: 100vh;
+  background: #f5f7fa;
+  .bg {
+    width: 100%;
+    height: 260rpx;
+  }
+  &-content {
+    padding: 32rpx 26rpx;
+    background: #ffffff;
+    border-radius: 24rpx 24rpx 0rpx 0rpx;
+    position: relative;
+    top: -20px;
+    // width: 100%;
+    height: 100%;
+    .unitGeneral-item-title {
+      font-weight: 400;
+      font-size: 28rpx;
+      color: #909399;
+    }
+    .active {
+      font-weight: 500;
+      font-size: 28rpx;
+      color: #1677ff;
+      position: relative;
+    }
+    .active::before {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 4rpx;
+      background: #1677ff;
+      border-radius: 2rpx;
+      position: absolute;
+      bottom: -24rpx;
+      left: 0;
+    }
+    &-item {
+      padding-top: 40rpx;
+    }
+  }
+}

@@ -1,13 +1,14 @@
 .index {
   width: 100%;
   background: #f5f7fa;
-  height: 100vh;
+  height: 100%;
+  padding-bottom: 20rpx;
   &-title {
     padding: 20rpx;
     background: #fff;
     .index-banner {
       height: 360rpx;
-      border-radius: 32rpx;
+      border-radius: 16rpx;
       overflow: hidden;
       .banner {
         width: 100%;
@@ -20,7 +21,7 @@
       grid-template-columns: repeat(3, 1fr);
       grid-gap: 20rpx;
       margin-top: 32rpx;
-      .index-function-item {
+      &-item {
         display: flex;
         align-items: center;
         flex-direction: column;
@@ -33,6 +34,15 @@
           height: 104rpx;
           margin-bottom: 16rpx;
         }
+      }
+      &-item:nth-of-type(1) {
+        margin-right: 52rpx;
+      }
+      &-item:nth-of-type(3) {
+        margin-left: 52rpx;
+      }
+      &-item:hover {
+        background: none;
       }
     }
   }
@@ -62,13 +72,21 @@
       margin-bottom: 40rpx;
       .logo {
         width: 112rpx;
-        height: auto;
+        height: 112rpx;
+        margin-right: 20rpx;
+      }
+      .main-image {
+        max-width: 200rpx;
+        height: 148rpx;
         margin-right: 20rpx;
       }
     }
+    &-item:last-child {
+      margin-bottom: 0;
+    }
     &-item-name {
-      font-size: 32rpx;
       font-weight: 600;
+      font-size: 28rpx;
       color: #333333;
       display: flex;
       flex-direction: column;
@@ -78,6 +96,13 @@
       font-size: 26rpx;
       color: #909399;
       margin-top: 8rpx;
+      display: flex;
+      align-items: center;
+      .group-name {
+        font-weight: 400;
+        font-size: 28rpx;
+        color: #ff6632;
+      }
       .level {
         width: 86rpx;
         height: 36rpx;
@@ -87,6 +112,7 @@
         font-weight: 400;
         font-size: 26rpx;
         color: #909399;
+        margin-left: 8rpx;
       }
     }
   }

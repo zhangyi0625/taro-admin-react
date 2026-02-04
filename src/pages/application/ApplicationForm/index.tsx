@@ -2,25 +2,30 @@ import { Button, Input, View, Text } from "@tarojs/components";
 import "./applicationForm.scss";
 import { useState } from "react";
 import Taro from "@tarojs/taro";
+import { saveApplication } from "../../../service/affiliate/affiliateApi";
 
 export type ApplicationFormType = {
   companyName: string;
-  name: string;
-  phone: string;
+  contactName: string;
+  contactPhone: string;
   address: string;
 };
 
 const ApplicationForm: React.FC = () => {
   const [form, setForm] = useState<ApplicationFormType>({
     companyName: "",
-    name: "",
-    phone: "",
+    contactName: "",
+    contactPhone: "",
     address: "",
   });
 
   const saveForm = async () => {
-    console.log(form, "form");
-    if (!form.companyName || !form.name || !form.phone || !form.address) {
+    if (
+      !form.companyName ||
+      !form.contactName ||
+      !form.contactPhone ||
+      !form.address
+    ) {
       Taro.showToast({
         title: "请填写完整信息",
         icon: "none",
@@ -28,19 +33,14 @@ const ApplicationForm: React.FC = () => {
       return;
     }
     try {
-      // const res = await Taro.request({
-      //   url: "/api/application/save",
-      //   method: "POST",
-      //   data: form,
-      // });
+      const resp = await saveApplication(form);
+      console.log(resp, "resp");
       Taro.showModal({
         title: "提交成功",
         content: "工作人员将会主动与您联系，请耐心等待！",
         success(result) {
           if (result.confirm) {
-            Taro.navigateBack({
-              delta: 1,
-            });
+            Taro.navigateBack();
           }
         },
       });
@@ -74,9 +74,9 @@ const ApplicationForm: React.FC = () => {
           <View className="applicationForm-form-item-input">
             <Input
               placeholder="请输入联系人"
-              value={form.name}
+              value={form.contactName}
               className="applicationForm-form-item-input"
-              onInput={(e) => setForm({ ...form, name: e.detail.value })}
+              onInput={(e) => setForm({ ...form, contactName: e.detail.value })}
             />
           </View>
         </View>
@@ -87,9 +87,11 @@ const ApplicationForm: React.FC = () => {
           <View className="applicationForm-form-item-input">
             <Input
               placeholder="请输入企业联系电话"
-              value={form.phone}
+              value={form.contactPhone}
               className="applicationForm-form-item-input"
-              onInput={(e) => setForm({ ...form, phone: e.detail.value })}
+              onInput={(e) =>
+                setForm({ ...form, contactPhone: e.detail.value })
+              }
             />
           </View>
         </View>

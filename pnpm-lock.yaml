@@ -53,6 +53,9 @@ importers:
       '@tarojs/taro':
         specifier: 4.1.6
         version: 4.1.6(@tarojs/components@4.1.6(@tarojs/helper@4.1.6)(@types/react@18.3.24)(postcss@8.5.6)(rollup@3.29.5))(@tarojs/helper@4.1.6)(@tarojs/shared@4.1.6)(@types/react@18.3.24)(postcss@8.5.6)(rollup@3.29.5)
+      lodash-es:
+        specifier: ^4.17.21
+        version: 4.17.21
       react:
         specifier: ^18.0.0
         version: 18.3.1

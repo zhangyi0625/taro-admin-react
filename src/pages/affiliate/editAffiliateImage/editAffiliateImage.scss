@@ -10,9 +10,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     font-weight: 400;
     font-size: 24rpx;
     color: #909399;
+    margin-bottom: 20rpx;
     .icon {
       width: 60rpx;
       height: 52rpx;
@@ -24,9 +26,21 @@
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 22rpx;
     &-item {
-      width: 100%;
-      height: 164rpx;
-      object-fit: cover;
+      width: 340rpx;
+      height: 339rpx;
+      position: relative;
+      .image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+    .delete-icon {
+      position: absolute;
+      top: 8rpx;
+      right: 8rpx;
+      width: 48rpx;
+      height: 48rpx;
     }
   }
 }

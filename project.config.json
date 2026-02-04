@@ -2,7 +2,7 @@
   "miniprogramRoot": "./dist",
   "projectname": "my-taro-App",
   "description": "taro admin",
-  "appid": "wx3f5e929c0e5e8189",
+  "appid": "wxf25d7df27fe3727c",
   "setting": {
     "urlCheck": true,
     "es6": false,

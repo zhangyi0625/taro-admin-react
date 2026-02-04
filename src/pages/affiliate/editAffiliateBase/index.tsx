@@ -8,11 +8,17 @@ import {
   Textarea,
 } from "@tarojs/components";
 import { useState } from "react";
-import { AffiliateInfoType } from "../index";
+import { AffiliateInfoType } from "../../../service/affiliate/affiliateModel";
 import "./editAffiliateBase.scss";
-import Taro from "@tarojs/taro";
+import Taro, { useLoad } from "@tarojs/taro";
 import ArrowRight from "../../../images/icon/arrow-icon.svg";
 import UploadIcon from "../../../images/icon/upload.svg";
+import {
+  getAffiliateInfoDetail,
+  updateAffiliateInfo,
+} from "../../../service/affiliate/affiliateApi";
+import { uploadFile } from "../../../service/upload/uploadApi";
+import DefaultLogo from "../../../images/icon/default-logo.svg";
 
 const EditAffiliateBase: React.FC = () => {
   const [affiliateInfo, setAffiliateInfo] = useState<
@@ -23,13 +29,50 @@ const EditAffiliateBase: React.FC = () => {
     position: "",
   });
 
+  const [imgList, setImgList] = useState<string>("");
+
   const changeLogo = () => {
     Taro.chooseImage({
       count: 1,
-      success: (res) => {
-        setAffiliateInfo({ ...affiliateInfo, logo: res.tempFilePaths[0] });
+      success: async (res) => {
+        Taro.uploadFile({
+          url: "https://xh.zaicang.net/api/app/file/upload",
+          filePath: res.tempFilePaths[0],
+          name: "file",
+          header: {
+            "Content-Type": "multipart/form-data",
+            Authorization: "Bearer " + Taro.getStorageSync("token"),
+          },
+          success: (res) => {
+            let data = JSON.parse(res.data);
+            console.log(res, "res", data);
+            if (data.code === 200) {
+              setAffiliateInfo({ ...affiliateInfo, logo: data.data.id });
+              setImgList(data.data.path);
+            }
+          },
+          fail: (err) => {
+            console.log(err);
+            Taro.showToast({
+              title: err.errMsg || "上传失败",
+              icon: "none",
+            });
+          },
+        });
       },
     });
+  };
+
+  useLoad((options) => {
+    init(options.id);
+  });
+
+  const init = async (id: string) => {
+    try {
+      const resp: any = await getAffiliateInfoDetail(id);
+      setImgList(resp?.logoPath || DefaultLogo);
+      setAffiliateInfo(resp || {});
+    } catch {}
   };
 
   const saveAffiliateInfo = async () => {
@@ -40,7 +83,7 @@ const EditAffiliateBase: React.FC = () => {
       });
       return;
     }
-    if (!affiliateInfo.phone) {
+    if (!affiliateInfo.contactPhone) {
       Taro.showToast({
         title: "请输入联系电话",
         icon: "none",
@@ -54,23 +97,17 @@ const EditAffiliateBase: React.FC = () => {
       });
       return;
     }
-    if (!affiliateInfo.remark) {
-      Taro.showToast({
-        title: "请输入企业简介",
-        icon: "none",
-      });
-      return;
-    }
     try {
-      const res = await Taro.request({
-        url: "/api/affiliate/save",
-        method: "POST",
-        data: affiliateInfo,
-      });
-      Taro.showToast({
-        title: "保存成功",
-        icon: "success",
-      });
+      const res: any = await updateAffiliateInfo(affiliateInfo);
+      if (res.code === 200) {
+        Taro.showToast({
+          title: res.msg || "保存成功",
+          icon: "success",
+        });
+        setTimeout(() => {
+          Taro.navigateBack();
+        }, 2000);
+      }
     } catch (error) {
       Taro.showToast({
         title: "保存失败",
@@ -95,7 +132,7 @@ const EditAffiliateBase: React.FC = () => {
             ) : (
               <Image
                 className="editAffiliateBase-form-item-avatar"
-                src={affiliateInfo.logo as string}
+                src={imgList}
               />
             )}
             <Image className="arrow-icon" src={ArrowRight} />
@@ -122,22 +159,22 @@ const EditAffiliateBase: React.FC = () => {
             style={{ justifyContent: "space-between" }}
           >
             <Picker
-              value={affiliateInfo.establishedTime as string}
+              value={affiliateInfo.establishmentDate as string}
               mode="date"
               onChange={(e) =>
                 setAffiliateInfo({
                   ...affiliateInfo,
-                  establishedTime: e.detail.value,
+                  establishmentDate: e.detail.value,
                 })
               }
             >
               <View
                 className="picker"
                 style={{
-                  color: affiliateInfo.establishedTime ? "black" : "gray",
+                  color: affiliateInfo.establishmentDate ? "black" : "gray",
                 }}
               >
-                {affiliateInfo.establishedTime ?? "选择成立时间"}
+                {affiliateInfo.establishmentDate ?? "选择成立时间"}
               </View>
             </Picker>
             <Image className="arrow-icon" src={ArrowRight} />
@@ -148,9 +185,12 @@ const EditAffiliateBase: React.FC = () => {
             <Text style={{ color: "red" }}>*</Text>联系电话
           </Text>
           <Input
-            value={affiliateInfo.phone}
+            value={affiliateInfo.contactPhone}
             onInput={(e) =>
-              setAffiliateInfo({ ...affiliateInfo, phone: e.detail.value })
+              setAffiliateInfo({
+                ...affiliateInfo,
+                contactPhone: e.detail.value,
+              })
             }
             type="text"
             className="editAffiliateBase-form-item-input"
@@ -186,13 +226,14 @@ const EditAffiliateBase: React.FC = () => {
         className="editAffiliateBase-form flex-col"
         style={{ padding: "32rpx 24rpx" }}
       >
-        <Text className="editAffiliateBase-form-item-label">
-          <Text style={{ color: "red" }}>*</Text>企业简介
-        </Text>
+        <Text className="editAffiliateBase-form-item-label">企业简介</Text>
         <Textarea
-          value={affiliateInfo.remark}
+          value={affiliateInfo.enterpriseDescription}
           onInput={(e) =>
-            setAffiliateInfo({ ...affiliateInfo, remark: e.detail.value })
+            setAffiliateInfo({
+              ...affiliateInfo,
+              enterpriseDescription: e.detail.value,
+            })
           }
           className="editAffiliateBase-form-item-textarea"
           autoHeight

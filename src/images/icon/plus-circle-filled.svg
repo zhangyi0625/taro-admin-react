@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>plus-circle-filled</title>
+    <g id="小程序" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="4-02企业信息-交互" transform="translate(-285, -1148)" fill-rule="nonzero">
+            <g id="编组-4" transform="translate(0, 1130)">
+                <g id="plus-circle-filled" transform="translate(285, 18)">
+                    <rect id="矩形" fill="#000000" opacity="0" x="0" y="0" width="16" height="16"></rect>
+                    <path d="M8,1 C4.134375,1 1,4.134375 1,8 C1,11.865625 4.134375,15 8,15 C11.865625,15 15,11.865625 15,8 C15,4.134375 11.865625,1 8,1 Z M11,8.375 C11,8.44375 10.94375,8.5 10.875,8.5 L8.5,8.5 L8.5,10.875 C8.5,10.94375 8.44375,11 8.375,11 L7.625,11 C7.55625,11 7.5,10.94375 7.5,10.875 L7.5,8.5 L5.125,8.5 C5.05625,8.5 5,8.44375 5,8.375 L5,7.625 C5,7.55625 5.05625,7.5 5.125,7.5 L7.5,7.5 L7.5,5.125 C7.5,5.05625 7.55625,5 7.625,5 L8.375,5 C8.44375,5 8.5,5.05625 8.5,5.125 L8.5,7.5 L10.875,7.5 C10.94375,7.5 11,7.55625 11,7.625 L11,8.375 Z" id="形状" fill="#1677FF"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

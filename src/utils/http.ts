@@ -37,7 +37,10 @@ class HttpRequest {
   baseOptions(params: RequestParams, method: HttpMethod = "GET"): HttpResponse {
     const { url, data, contentType: customContentType } = params;
     const BASE_URL = process.env.TARO_APP_API;
-    const contentType = customContentType || "application/json";
+    const contentType =
+      url === "/api/app/file/upload"
+        ? "multipart/form-data"
+        : customContentType || "application/json";
 
     const option: RequestOptions = {
       url: `${BASE_URL}${url}`,
@@ -45,7 +48,9 @@ class HttpRequest {
       method,
       header: {
         "content-type": contentType,
-        Authorization: "Bearer " + Taro.getStorageSync("token"),
+        Authorization: Taro.getStorageSync("token")
+          ? "Bearer " + Taro.getStorageSync("token")
+          : "",
       },
     };
 

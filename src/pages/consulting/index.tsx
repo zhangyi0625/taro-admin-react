@@ -1,7 +1,7 @@
-import { View, Text, Image, Button } from "@tarojs/components";
+import { View, Image, Button } from "@tarojs/components";
+import Taro from "@tarojs/taro";
 import "./index.scss";
 import ConsultingBg from "../../images/consulting-bg.png";
-import Taro from "@tarojs/taro";
 
 const Consulting: React.FC = () => {
   const phoneNumber = "0574-87292367";

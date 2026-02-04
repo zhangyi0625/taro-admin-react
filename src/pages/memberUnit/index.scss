@@ -1,0 +1,41 @@
+.memberUnit {
+  background: #f5f7fa;
+  height: 100%;
+  &-filter {
+    margin: 18rpx 0 20rpx;
+    background: #ffffff;
+    &-item {
+      padding: 32rpx 24rpx 32rpx 0rpx;
+      margin-left: 24rpx;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1rpx solid #edeff2;
+      font-weight: 400;
+      font-size: 28rpx;
+      color: #303133;
+      &-label {
+        width: 120rpx;
+        padding-right: 24rpx;
+        text-align: left;
+        font-weight: 600;
+      }
+      &-input {
+        flex: 1;
+        width: 100%;
+      }
+    }
+    &-collapse {
+      font-weight: 400;
+      font-size: 24rpx;
+      color: #909399;
+      text-align: center;
+      justify-content: center;
+      padding: 22rpx 0;
+      .arrow-icon {
+        width: 24rpx !important;
+        height: 12rpx !important;
+      }
+    }
+  }
+}

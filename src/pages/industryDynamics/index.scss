@@ -1,0 +1,69 @@
+.industryDynamics {
+  height: 100%;
+  background: #f5f7fa;
+  &-tab {
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    overflow-x: scroll;
+    white-space: nowrap;
+    padding: 26rpx 24rpx 26rpx 0;
+    &-item {
+      font-weight: 400;
+      font-size: 28rpx;
+      color: #909399;
+      margin-left: 32rpx;
+    }
+    .active {
+      font-weight: 600;
+      font-size: 28rpx;
+      color: #1677ff;
+      position: relative;
+    }
+    .active::before {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 4rpx;
+      background: #1677ff;
+      border-radius: 2rpx;
+      position: absolute;
+      bottom: -12rpx;
+      left: 0;
+    }
+    &-item:last-child {
+      margin-right: 0;
+    }
+  }
+  &-content {
+    padding: 24rpx;
+    margin-top: 20rpx;
+    background: #fff;
+    &-item {
+      display: flex;
+      align-items: center;
+      font-weight: 600;
+      font-size: 28rpx;
+      color: #303133;
+      margin-bottom: 32rpx;
+      .image {
+        max-width: 200rpx;
+        height: 148rpx;
+        margin-right: 20rpx;
+      }
+      .name {
+        font-weight: 400;
+        font-size: 28rpx;
+        color: #ff6632;
+        margin-top: 8rpx;
+      }
+      .date {
+        font-weight: 400;
+        font-size: 28rpx;
+        color: #909399;
+        margin-top: 8rpx;
+        margin-left: 12rpx;
+      }
+    }
+  }
+}
