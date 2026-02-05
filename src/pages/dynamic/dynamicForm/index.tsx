@@ -42,7 +42,7 @@ const dynamicForm = () => {
       }
     } catch (error) {
       Taro.showToast({
-        title: error.errMsg || "提交失败",
+        title: error.errMsg || "无法给自己留言",
         icon: "none",
       });
     }

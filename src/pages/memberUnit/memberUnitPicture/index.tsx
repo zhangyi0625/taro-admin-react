@@ -3,6 +3,7 @@ import { useLoad } from "@tarojs/taro";
 import { useState } from "react";
 import "./index.scss";
 import { getMemberUnitImage } from "../../../service/memberUnit/memberUnitApi";
+import Taro from "@tarojs/taro";
 
 const MemberUnitPicture: React.FC = () => {
   const [imageList, setImageList] = useState<string[]>([]);
@@ -19,11 +20,24 @@ const MemberUnitPicture: React.FC = () => {
       console.log(err);
     }
   };
+
+  const previewImage = (item: string) => {
+    Taro.previewImage({
+      current: item,
+      urls: [item],
+    });
+  };
   return (
     <View className="memberUnitPicture">
       <View className="memberUnitPicture-image">
         {imageList.map((item) => (
-          <Image src={item} className="image" mode="widthFix" key={item} />
+          <Image
+            src={item}
+            className="image"
+            mode="aspectFill"
+            key={item}
+            onClick={() => previewImage(item)}
+          />
         ))}
       </View>
     </View>

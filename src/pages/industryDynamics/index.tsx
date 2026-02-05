@@ -52,10 +52,22 @@ const IndustryDynamics: React.FC = () => {
   };
 
   const handleClick = (item: IndustryNewsDetailType) => {
+    Taro.setStorageSync(
+      item.url ? "url" : "content",
+      item.url ? item.url : JSON.stringify(item.content),
+    );
+    Taro.setStorageSync("wxTitle", item.title);
     Taro.navigateTo({
       url: `/pages/webview/index?content=${item.url ? item.url : item.content}&type=${
         item.url ? "website" : "markdown"
       }&title=${item.title}`,
+    });
+  };
+
+  const previewImage = (url: string) => {
+    Taro.previewImage({
+      current: url, // 当前显示图片的http链接
+      urls: [url], // 需要预览的图片http链接列表
     });
   };
 
@@ -78,17 +90,14 @@ const IndustryDynamics: React.FC = () => {
       </View>
       <View className="industryDynamics-content">
         {industryNews.map((item) => (
-          <View
-            key={item.id}
-            className="industryDynamics-content-item"
-            onClick={() => handleClick(item)}
-          >
+          <View key={item.id} className="industryDynamics-content-item">
             <Image
               src={item.mainImagePath}
               className="image"
               mode="aspectFill"
+              onClick={() => previewImage(item.mainImagePath)}
             />
-            <View className="flex-col">
+            <View className="flex-col" onClick={() => handleClick(item)}>
               <Text className="text-container">{item.title}</Text>
               <View className="inline-flex">
                 <Text className="name">{item.groupName}</Text>

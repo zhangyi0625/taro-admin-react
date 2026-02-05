@@ -1,7 +1,7 @@
 .memberUnitDetail {
   background: #f5f7fa;
   height: 100%;
-  padding-bottom: 20rpx;
+  padding-bottom: 40rpx;
   &-title {
     height: 184rpx;
     background: #1677ff;
@@ -16,7 +16,7 @@
       width: 176rpx;
       height: 176rpx;
       background: #ffffff;
-      border-radius: 24rpx 24rpx 0rpx 0rpx;
+      border-radius: 12rpx;
       position: absolute;
       top: -84rpx;
       left: 48rpx;
@@ -24,13 +24,14 @@
       .logo-img {
         width: 100%;
         height: 100%;
+        border-radius: 12rpx;
       }
     }
     &-position {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 36rpx 24rpx 0 244rpx;
+      padding: 28rpx 24rpx 0 244rpx;
       .collection {
         width: 240rpx;
         height: 64rpx;
@@ -137,6 +138,7 @@
       font-weight: 400;
       font-size: 28rpx;
       color: #303133;
+      padding: 12rpx 0;
       .avatar {
         width: 124rpx;
         height: 124rpx;
@@ -173,14 +175,20 @@
       }
     }
   }
+  .tag-item {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 8rpx;
+    margin-bottom: 36rpx;
+  }
   .tag {
-    padding: 4rpx 12rpx;
-    background: #fff0eb;
-    border-radius: 4rpx;
     font-weight: 400;
     font-size: 26rpx;
     color: #ff6632;
+    padding: 10rpx 12rpx;
     text-align: center;
-    margin: 0 20rpx 18rpx 0;
+    border-radius: 14rpx;
+    background: #fff0eb;
+    white-space: nowrap;
   }
 }

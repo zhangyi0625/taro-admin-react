@@ -9,9 +9,31 @@ const Webview: React.FC = () => {
   const [content, setContent] = useState<string>("https://mp.weixin.qq.com/");
   useLoad((options) => {
     setType(options.type as "website" | "markdown");
-    setContent(options.content);
+    // setContent(JSON.parse(options.content));
+    if (options.type === "markdown") {
+      let htmlContent = JSON.parse(Taro.getStorageSync("content"));
+      // 查找并修改img或image标签，添加或修改mode属性为widthFix
+      if (htmlContent && typeof htmlContent === "string") {
+        // 直接使用字符串替换的方式，更简单可靠
+        htmlContent = htmlContent
+          .split("<img")
+          .join(
+            '<img mode="widthFix" height="auto" width="100%" height="auto"',
+          );
+        htmlContent = htmlContent
+          .split("<image")
+          .join(
+            '<image mode="widthFix" height="auto" width="100%" height="auto"',
+          );
+        console.log(htmlContent, "htmlContent");
+        setContent(htmlContent);
+      }
+      // setContent(htmlContent);
+    } else {
+      setContent(Taro.getStorageSync("url"));
+    }
     Taro.setNavigationBarTitle({
-      title: options.title,
+      title: Taro.getStorageSync("wxTitle"),
     });
     console.log(options, "options", type, content);
   });
@@ -19,7 +41,10 @@ const Webview: React.FC = () => {
     <View className="webview">
       {type === "website" && <WebView src={content} />}
       {type === "markdown" && (
-        <View dangerouslySetInnerHTML={{ __html: content }}></View>
+        <View
+          className="markdown-content"
+          dangerouslySetInnerHTML={{ __html: content }}
+        ></View>
       )}
     </View>
   );

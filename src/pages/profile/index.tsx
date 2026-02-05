@@ -9,6 +9,7 @@ import Message from "../../images/icon/profile.svg";
 import Affiliate from "../../images/icon/affiliate.svg";
 import Collection from "../../images/icon/collect.svg";
 import Communication from "../../images/icon/communicate.svg";
+import SendCommunication from "../../images/icon/send-communication.svg";
 import { UserInfoParams } from "../../service/user/userModel";
 import { getUserDetail, wechatLogin } from "../../service/user/userApi";
 
@@ -28,7 +29,7 @@ const Profile: React.FC = () => {
 
   const refreshUserInfo = async () => {
     try {
-      // const resp: any = await getUserDetail();
+      //
       await Taro.login({
         success: async function (res) {
           if (res.code) {
@@ -46,6 +47,9 @@ const Profile: React.FC = () => {
           }
         },
       });
+      // const resp: any = await getUserDetail();
+      // setUserInfo(resp.customer || {});
+      // Taro.setStorageSync("userInfo", resp.customer);
     } catch (err) {
       console.log(err);
     }
@@ -70,7 +74,7 @@ const Profile: React.FC = () => {
         title: "企业管理",
         icon: Affiliate,
         url: "/pages/affiliate/index",
-        isShow: getIsShow("companyId"),
+        isShow: getIsShow("companyMaster"),
       },
     ];
   }, [userInfo]);
@@ -91,7 +95,7 @@ const Profile: React.FC = () => {
       },
       {
         title: "发出的留言",
-        icon: Communication,
+        icon: SendCommunication,
         url: "/pages/dynamic/index?direction=1",
         isShow: getIsShow("name"),
       },

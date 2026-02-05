@@ -44,25 +44,33 @@ const Dynamic: React.FC = () => {
           <View className="inline-flex">
             <Image
               className="dynamic-item-avatar"
-              src={item.receiverAvatar ?? AvatarIcon}
+              src={
+                direction === 1
+                  ? (item.receiverAvatar ?? AvatarIcon)
+                  : (item.senderAvatar ?? AvatarIcon)
+              }
             />
             <View className="flex-col">
               <View>
-                {item.receiverName}
+                {direction === 2 ? item.senderName : item.receiverName}
                 <Text style={{ color: "##FA8C16", marginLeft: "12rpx" }}>
-                  {item.senderPosition}
+                  {direction === 2
+                    ? item.senderPosition
+                    : item.receiverPosition}
                 </Text>
               </View>
               <View
                 className="dynamic-item-time"
                 style={{ marginBottom: "none" }}
               >
-                {item.senderCompanyName}
+                {direction === 2
+                  ? item.senderCompanyName
+                  : item.receiverCompanyName}
               </View>
             </View>
           </View>
           {direction === 2 && (
-            <View className="dynamic-item-phone">电话：{item.phone}</View>
+            <View className="dynamic-item-phone">电话：{item.senderPhone}</View>
           )}
           <View className="dynamic-item-content">{item.content}</View>
           <View className="dynamic-item-time">时间：{item.createTime}</View>

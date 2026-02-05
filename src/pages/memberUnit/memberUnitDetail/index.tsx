@@ -19,6 +19,7 @@ import Taro from "@tarojs/taro";
 import ArrowRight from "../../../images/icon/arrow-icon.svg";
 import IconChange from "../../../images/icon/change.svg";
 import FavoriteIcon from "../../../images/icon/favorite.svg";
+import Avatar from "../../../images/icon/avatar.svg";
 import {
   cancelFavoriteCompany,
   favoriteCompany,
@@ -91,6 +92,9 @@ const MemberUnitDetail = () => {
   });
 
   const init = async (id?: string) => {
+    Taro.showLoading({
+      title: "加载中",
+    });
     try {
       Promise.all([
         getMemberUnitDetail({ id: id || "" }),
@@ -101,13 +105,18 @@ const MemberUnitDetail = () => {
       ]).then((res: any) => {
         setMemberUnitDetail(res[0]);
         setCustomerList(
-          res[1].filter((i) => i.id !== Taro.getStorageSync("userInfo")?.id) ??
-            [],
+          res[1] ?? [],
+          // .filter(
+          //   (i) =>
+          //     i.id !== Taro.getStorageSync("userInfo")?.id &&
+          //     Taro.getStorageSync("userInfo")?.companyMaster,
+          // ) ?? [],
         );
         setImageList(
           res[2].map((i: { imagePath: string }) => i.imagePath) ?? [],
         );
       });
+      Taro.hideLoading();
     } catch (err) {
       console.log(err);
     }
@@ -172,11 +181,10 @@ const MemberUnitDetail = () => {
             className="logo-img"
           />
         </View>
-        {/* {getToken() && ( */}
         <View
           className={
             !getToken()
-              ? "visibility-hidden"
+              ? "memberUnitDetail-baseInfo-position visibility-hidden"
               : "memberUnitDetail-baseInfo-position"
           }
         >
@@ -196,7 +204,6 @@ const MemberUnitDetail = () => {
             <Text className="share-text">分享</Text>
           </Button>
         </View>
-        {/* )} */}
         <View className="memberUnitDetail-baseInfo-content">
           <View>{memberUnitDetail?.name}</View>
           <View className="memberUnitDetail-baseInfo-content-level">
@@ -216,7 +223,7 @@ const MemberUnitDetail = () => {
             </Text>
           </View>
           <View className="text">优势业务</View>
-          <View className="flex-wrap" style={{ marginTop: "24rpx" }}>
+          <View className="tag-item" style={{ marginTop: "24rpx" }}>
             {getAdvanceBusiness().map((item) => (
               <View className="tag" key={item}>
                 {item}
@@ -255,7 +262,7 @@ const MemberUnitDetail = () => {
       <View className="memberUnitDetail-remark">
         <View className="memberUnitDetail-remark-title">业务信息</View>
         <View className="memberUnitDetail-remark-nextTitle">优势业务</View>
-        <View className="flex-wrap">
+        <View className="tag-item">
           {getAdvanceBusiness().map((item) => (
             <View className="tag" key={item}>
               {item}
@@ -263,7 +270,7 @@ const MemberUnitDetail = () => {
           ))}
         </View>
         <View className="memberUnitDetail-remark-nextTitle">优势起运港</View>
-        <View className="flex-wrap">
+        <View className="tag-item">
           {getOtherAdvance("porList", "cnName").map((item) => (
             <View className="tag" key={item}>
               {item}
@@ -271,7 +278,7 @@ const MemberUnitDetail = () => {
           ))}
         </View>
         <View className="memberUnitDetail-remark-nextTitle">业务目的港</View>
-        <View className="flex-wrap">
+        <View className="tag-item">
           {getOtherAdvance("fndList", "cnName").map((item) => (
             <View className="tag" key={item}>
               {item}
@@ -279,7 +286,7 @@ const MemberUnitDetail = () => {
           ))}
         </View>
         <View className="memberUnitDetail-remark-nextTitle">业务航线</View>
-        <View className="flex-wrap">
+        <View className="tag-item">
           {getOtherAdvance("routeList", "name").map((item) => (
             <View className="tag" key={item}>
               {item}
@@ -287,7 +294,7 @@ const MemberUnitDetail = () => {
           ))}
         </View>
         <View className="memberUnitDetail-remark-nextTitle">优势船东</View>
-        <View className="flex-wrap">
+        <View className="tag-item">
           {getOtherAdvance("carrierList", "cnName").map((item) => (
             <View className="tag" key={item}>
               {item}
@@ -295,7 +302,7 @@ const MemberUnitDetail = () => {
           ))}
         </View>
       </View>
-      {imageList.length && (
+      {imageList.length > 0 && (
         <View className="memberUnitDetail-remark">
           <View
             className="inline-flex"
@@ -314,12 +321,17 @@ const MemberUnitDetail = () => {
           </View>
           <View className="memberUnitDetail-remark-image">
             {imageList.slice(0, 3).map((item) => (
-              <Image src={item} className="image" mode="widthFix" key={item} />
+              <Image
+                src={item}
+                className="image"
+                mode="aspectFill"
+                key={item}
+              />
             ))}
           </View>
         </View>
       )}
-      {getRandomThree().length && (
+      {getRandomThree().length > 0 && (
         <View className="memberUnitDetail-remark">
           <View
             className="inline-flex"
@@ -342,7 +354,10 @@ const MemberUnitDetail = () => {
           {getRandomThree().map((item) => (
             <View className="customer-item" key={item.id}>
               <View className="inline-flex">
-                <Image src={item.avatarId as string} className="avatar" />
+                <Image
+                  src={(item.avatarPath as string) ?? Avatar}
+                  className="avatar"
+                />
                 <View className="flex-col" style={{ marginTop: "6rpx" }}>
                   <View className="text-large">
                     {item.name}

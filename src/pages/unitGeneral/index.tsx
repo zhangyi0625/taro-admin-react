@@ -2,6 +2,8 @@ import { View, Image } from "@tarojs/components";
 import "./index.scss";
 import { useLoad } from "@tarojs/taro";
 import Taro from "@tarojs/taro";
+import "@tarojs/taro/html.css";
+import "@tarojs/taro/html5.css";
 import { getIndustryColumnList } from "../../service/memberUnit/memberUnitApi";
 import BannerImg from "../../images/unitGeneral-bg.png";
 import { useCallback, useState } from "react";
@@ -13,6 +15,8 @@ const unitGeneral: React.FC = () => {
   >([]);
 
   const [defaultUnitGeneral, setDefaultUnitGeneral] = useState<string>("");
+
+  const [contentType, setContentType] = useState<string>("content");
 
   useLoad((options) => {
     Taro.setNavigationBarTitle({
@@ -29,11 +33,23 @@ const unitGeneral: React.FC = () => {
       });
       setIndustryColumnList(resp || []);
       setDefaultUnitGeneral(resp?.[0]?.columnName || "");
+      setContentType(
+        !!industryColumnList.filter(
+          (i) => i.columnName === resp?.[0]?.columnName,
+        )[0].content
+          ? "content"
+          : "image",
+      );
     } catch {}
   };
 
   const changeDefaultUnitGeneral = (columnName: string) => {
     setDefaultUnitGeneral(columnName);
+    setContentType(
+      !!industryColumnList.filter((i) => i.columnName === columnName)[0].content
+        ? "content"
+        : "image",
+    );
   };
 
   const getContent = useCallback(() => {
@@ -44,21 +60,81 @@ const unitGeneral: React.FC = () => {
       (i) => i.columnName === defaultUnitGeneral,
     )[0] as UnitGeneralIndustryColumnType;
     if (items.content) {
+      console.log(items.content, "items.content", Taro.options);
       return (
         <View
-          className="unitGeneral-content-item"
+          className="unitGeneral-content-item taro_html"
           dangerouslySetInnerHTML={{ __html: items.content }}
         />
       );
     } else {
+      // setContentType("image");
       return getImageList(items.imagePath ?? []);
     }
   }, [defaultUnitGeneral, industryColumnList]);
 
-  const getImageList = (imageIds: string[]) => {
-    return imageIds.map((item) => {
-      return <Image src={item} className="unitGeneral-image" mode="widthFix" />;
+  const previewImage = (imageId: string) => {
+    Taro.previewImage({
+      urls: [imageId],
+      current: imageId,
     });
+  };
+
+  const getImageList = (imageIds: string[]) => {
+    console.log(
+      imageIds,
+      "imageIds",
+      imageIds.filter((_, index) => index % 2 === 0),
+      industryColumnList.findIndex((i) => i.columnName === defaultUnitGeneral),
+    );
+
+    return imageIds.map((item) => (
+      <Image
+        src={item}
+        onClick={() => previewImage(item)}
+        className={`unitGeneral-image unitGeneral-image-${industryColumnList.findIndex((i) => i.columnName === defaultUnitGeneral)}`}
+        mode={
+          industryColumnList.findIndex(
+            (i) => i.columnName === defaultUnitGeneral,
+          ) === 2
+            ? "heightFix"
+            : "aspectFill"
+        }
+      />
+    ));
+    // return <View>11111</View>;
+
+    // return (
+    //   <View className="waterfall-container">
+    //     1111
+    //     <View className="waterfall-column">
+    //       {imageIds
+    //         .filter((_, index) => index % 2 === 0)
+    //         .map((item, index) => {
+    //           return (
+    //             <Image
+    //               key={item}
+    //               src={item}
+    //               className="waterfall-item"
+    //               mode="widthFix"
+    //             />
+    //           );
+    //         })}
+    //     </View>
+    //     <View className="waterfall-column">
+    //       {imageIds
+    //         .filter((_, index) => index % 2 === 1)
+    //         .map((item, index) => (
+    //           <Image
+    //             key={item}
+    //             src={item}
+    //             className="waterfall-item"
+    //             mode="widthFix"
+    //           />
+    //         ))}
+    //     </View>
+    //   </View>
+    // );
   };
 
   return (
@@ -83,7 +159,15 @@ const unitGeneral: React.FC = () => {
             </View>
           ))}
         </View>
-        <View className="unitGeneral-content-item">{getContent()}</View>
+        <View
+          className={
+            contentType === "content"
+              ? "unitGeneral-content-item"
+              : "unitGeneral-content-item unitGeneral-content-image"
+          }
+        >
+          {getContent()}
+        </View>
       </View>
     </View>
   );

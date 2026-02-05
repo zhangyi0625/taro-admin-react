@@ -21,6 +21,7 @@ import type {
   MemberUnitDetailType,
 } from "../../service/memberUnit/memberUnitModel";
 import {
+  getEffectiveAnnouncementList,
   getIndustryColumnList,
   getIndustryNewsList,
   getMemberUnitList,
@@ -60,6 +61,8 @@ const Index: React.FC = () => {
     { id: string; groupName: string }[]
   >([]);
 
+  const [advertisement, setAdvertisement] = useState<any[]>([]);
+
   const FunItemsOptions: indexFunItemsType[] = [
     {
       title: "协会概况",
@@ -88,7 +91,7 @@ const Index: React.FC = () => {
       await Promise.all([
         getMemberUnitList({
           isShow: true,
-          sort: "member_level",
+          sort: "sort",
           order: "desc",
         }),
         getIndustryNewsList(),
@@ -114,8 +117,22 @@ const Index: React.FC = () => {
     getFirstLogin();
     setTimeout(() => {
       init();
+      loadAdvertisement();
     }, 1000);
   });
+
+  const loadAdvertisement = async () => {
+    try {
+      const resp: any = await getEffectiveAnnouncementList({});
+      console.log(resp, "resp");
+
+      setAdvertisement(
+        resp ? [resp] : [{ imagePath: BannerImg, link: "", title: "" }],
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const getFirstLogin = async () => {
     await Taro.login({
@@ -146,18 +163,43 @@ const Index: React.FC = () => {
   });
 
   const handleClick = (item: IndustryNewsDetailType) => {
+    Taro.setStorageSync(
+      item.url ? "url" : "content",
+      item.url ? item.url : JSON.stringify(item.content),
+    );
+    Taro.setStorageSync("wxTitle", item.title);
     Taro.navigateTo({
       url: `/pages/webview/index?content=${item.url ? item.url : item.content}&type=${
         item.url ? "website" : "markdown"
-      }&title=${item.title}`,
+      }`,
     });
+  };
+
+  const previewImage = (url: string) => {
+    Taro.previewImage({
+      current: url, // 当前显示图片的http链接
+      urls: [url], // 需要预览的图片http链接列表
+    });
+  };
+
+  const jumpEither = () => {
+    Taro.setStorageSync("url", advertisement?.[0]?.link || "");
+    Taro.setStorageSync("wxTitle", advertisement?.[0]?.title || "");
+    Taro.navigateTo({
+      url: `/pages/webview/index?content=${advertisement?.[0]?.link || ""}&type=${"website"}`,
+    });
+    Taro.navigateTo({ url: advertisement?.[0]?.link || "" });
   };
 
   return (
     <View className="index">
       <View className="index-title">
         <View className="index-banner">
-          <Image src={BannerImg} className="banner" />
+          <Image
+            src={advertisement?.[0]?.imagePath}
+            onClick={jumpEither}
+            className="banner"
+          />
         </View>
         <View className="index-function">
           {FunItemsOptions.map((item) => (
@@ -190,7 +232,7 @@ const Index: React.FC = () => {
           </View>
         </View>
         <View className="index-memberUnit-content">
-          {memberUnit.map((item) => (
+          {memberUnit.slice(0, 10).map((item) => (
             <View
               className="index-memberUnit-item"
               key={item.name}
@@ -243,18 +285,18 @@ const Index: React.FC = () => {
           </View>
         </View>
         <View className="index-memberUnit-content">
-          {industryNews.map((item) => (
-            <View
-              className="index-memberUnit-item"
-              key={item.id}
-              onClick={() => handleClick(item)}
-            >
+          {industryNews.slice(0, 5).map((item) => (
+            <View className="index-memberUnit-item" key={item.id}>
               <Image
                 src={item.mainImagePath ?? defaultLogo}
                 className="main-image"
-                mode="aspectFit"
+                mode="aspectFill"
+                onClick={() => previewImage(item.mainImagePath)}
               />
-              <View className="index-memberUnit-item-name">
+              <View
+                className="index-memberUnit-item-name"
+                onClick={() => handleClick(item)}
+              >
                 <Text className="text-container">{item.title}</Text>
                 <View className="index-memberUnit-item-level" key={item.id}>
                   <Text className="group-name">{item.groupName}</Text>

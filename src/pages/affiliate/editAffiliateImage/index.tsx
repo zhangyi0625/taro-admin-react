@@ -95,7 +95,11 @@ const EditAffiliateImage: React.FC = () => {
             className="editAffiliateImage-image-item"
             key={item.imagePath || ""}
           >
-            <Image src={item.imagePath || ""} className="image" />
+            <Image
+              src={item.imagePath || ""}
+              className="image"
+              mode="aspectFill"
+            />
             <Image
               src={DeleteIcon}
               className="delete-icon"

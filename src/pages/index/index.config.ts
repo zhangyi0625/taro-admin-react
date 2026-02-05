@@ -1,3 +1,3 @@
 export default definePageConfig({
-  navigationBarTitleText: "宁波国际货运代理···",
+  navigationBarTitleText: "货代对接宝",
 });

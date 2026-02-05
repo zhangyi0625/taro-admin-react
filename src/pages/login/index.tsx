@@ -100,36 +100,36 @@ const Login: React.FC = () => {
   };
 
   const handleSendCode = async () => {
-    // if (!loginParams.phone || !regex.test(loginParams.phone)) {
-    //   Taro.showToast({
-    //     title: "请输入正确的手机号",
-    //     icon: "none",
-    //   });
-    //   return;
-    // }
-    try {
-      // const resp: any = await sendCode({ phone: loginParams.phone });
-      // console.log(resp, "resp");
-      // if (resp.code === 200) {
+    if (!loginParams.phone || !regex.test(loginParams.phone)) {
       Taro.showToast({
-        title: "验证码发送成功",
-        icon: "success",
+        title: "请输入正确的手机号",
+        icon: "none",
       });
-      let countdown = 60;
-      setCode(60);
-      setIsCounting(true);
+      return;
+    }
+    try {
+      const resp: any = await sendCode({ phone: loginParams.phone });
+      // console.log(resp, "resp");
+      if (resp.code === 200) {
+        Taro.showToast({
+          title: "验证码发送成功",
+          icon: "success",
+        });
+        let countdown = 60;
+        setCode(60);
+        setIsCounting(true);
 
-      // 使用定时器倒计时
-      const timer = setInterval(() => {
-        countdown -= 1;
-        setCode(countdown);
-        if (countdown === 0) {
-          clearInterval(timer);
-          setIsCounting(false);
-          setCode(60);
-        }
-      }, 1000);
-      // }
+        // 使用定时器倒计时
+        const timer = setInterval(() => {
+          countdown -= 1;
+          setCode(countdown);
+          if (countdown === 0) {
+            clearInterval(timer);
+            setIsCounting(false);
+            setCode(60);
+          }
+        }, 1000);
+      }
     } catch (err) {
       Taro.showToast({
         title: err.message || "验证码发送失败失败",
@@ -151,12 +151,14 @@ const Login: React.FC = () => {
                 })
               : await wechatLogin({ wxCode: res.code });
             console.log(resp, "res, resp");
-            Taro.showToast({
-              title: "登录成功",
-              icon: "success",
-            });
-            Taro.setStorageSync("token", resp.accessToken);
-            Taro.setStorageSync("userInfo", resp.customer);
+            if (resp) {
+              Taro.showToast({
+                title: "登录成功",
+                icon: "success",
+              });
+              Taro.setStorageSync("token", resp.accessToken);
+              Taro.setStorageSync("userInfo", resp.customer);
+            }
             setTimeout(() => {
               Taro.navigateBack();
             }, 2000);

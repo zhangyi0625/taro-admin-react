@@ -7,7 +7,9 @@ export interface MemberUnitSearchParams {
   keyword?: string;
   sort?: string;
   order?: string;
-  [key: string]: string | undefined | boolean;
+  limit?: number;
+  offset?: number;
+  [key: string]: string | undefined | boolean | number;
 }
 
 export interface MemberUnitDetailType {
@@ -23,7 +25,7 @@ export interface MemberUnitDetailType {
   email: string;
   enterpriseDescription: string | null;
   advantageBusiness: string | null;
-  images: { id: string }[];
+  images: { id: string; imagePath: string }[];
 }
 
 export interface IndustryNewsDetailType {
@@ -53,6 +55,7 @@ export interface UnitGeneralIndustryColumnType {
 export interface MemberUnitCustomerType {
   id: string;
   avatarId: string;
+  avatarPath: string;
   name: string;
   phone: string;
   position: string;

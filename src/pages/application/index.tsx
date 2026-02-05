@@ -1,6 +1,8 @@
 import { View, Text } from "@tarojs/components";
 import "./index.scss";
-import Taro from "@tarojs/taro";
+import Taro, { useDidShow } from "@tarojs/taro";
+import { getIndustryColumnList } from "../../service/memberUnit/memberUnitApi";
+import { useState } from "react";
 
 const Application: React.FC = () => {
   const processSteps = [
@@ -10,9 +12,43 @@ const Application: React.FC = () => {
     { id: 4, name: "发给会员证书（缴纳会费）", desc: "完成入会流程" },
   ];
 
+  const [template, setTemplate] = useState<string>("");
+
+  useDidShow(() => {
+    init();
+  });
+
+  const init = async () => {
+    try {
+      const resp: any = await getIndustryColumnList({
+        groupName: "入会申请",
+        sort: "order",
+      });
+      let htmlContent = resp[0].content ?? "";
+      // 查找并修改img或image标签，添加或修改mode属性为widthFix
+      if (htmlContent && typeof htmlContent === "string") {
+        // 直接使用字符串替换的方式，更简单可靠
+        htmlContent = htmlContent
+          .split("<img")
+          .join(
+            '<img mode="widthFix" height="auto" width="100%" height="auto"',
+          );
+        htmlContent = htmlContent
+          .split("<image")
+          .join(
+            '<image mode="widthFix" height="auto" width="100%" height="auto"',
+          );
+        console.log(htmlContent, "htmlContent");
+        setTemplate(htmlContent);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <View className="application">
-      <View className="process-section">
+      {/* <View className="process-section">
         <View className="process-title">
           <Text>入会流程</Text>
         </View>
@@ -53,6 +89,10 @@ const Application: React.FC = () => {
         <View>
           会员单位：<Text>2000元/年</Text>
         </View>
+      </View> */}
+
+      <View className="application-content">
+        <View dangerouslySetInnerHTML={{ __html: template }}></View>
       </View>
 
       <View className="application-fixed">

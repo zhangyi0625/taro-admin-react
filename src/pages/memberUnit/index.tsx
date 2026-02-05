@@ -17,11 +17,15 @@ import {
 import CustomSearch from "../../components/CustomSearch";
 import Taro from "@tarojs/taro";
 import CollectionItem from "../collection/CollectionItem";
-import { getMemberUnitList } from "../../service/memberUnit/memberUnitApi";
+import {
+  getMemberUnitList,
+  getMemberUnitPageListPage,
+} from "../../service/memberUnit/memberUnitApi";
 
 const MemberUnit: React.FC = () => {
   const [searchFilter, setSearchFilter] = useState<MemberUnitSearchParams>({
     isShow: true,
+    keyword: "",
   });
 
   const [memberUnitList, setMemberUnitList] = useState<MemberUnitDetailType[]>(
@@ -59,12 +63,20 @@ const MemberUnit: React.FC = () => {
 
   const init = async () => {
     try {
-      const resp: any = await getMemberUnitList({
+      const resp: any = await getMemberUnitPageListPage({
         ...searchFilter,
         isShow: true,
+        limit: 9999,
+        page: 1,
       });
-      setMemberUnitList(resp ?? []);
-      console.log(resp, "resp", memberUnitList);
+      setMemberUnitList(resp.list ?? []);
+      console.log(
+        resp,
+        "resp",
+        memberUnitList,
+        searchFilter.keyword,
+        searchFilter,
+      );
     } catch (err) {
       console.log(err);
     }
@@ -90,7 +102,7 @@ const MemberUnit: React.FC = () => {
     init();
   }, [searchFilter]);
 
-  const onChangeSearchFilter = (searchFilter: MemberUnitSearchParams) => {
+  const onChangeSearchFilter = (filter: MemberUnitSearchParams) => {
     let porParams = Taro.getStorageSync("porSelected");
     let fndParams = Taro.getStorageSync("fndSelected");
     let routeParams = Taro.getStorageSync("routeSelected");
@@ -121,6 +133,14 @@ const MemberUnit: React.FC = () => {
     }
   };
 
+  const clearSearchFilter = (key: string) => {
+    setSearchFilter({
+      ...searchFilter,
+      [searchKey[key]]: "",
+    });
+    console.log(searchFilter, "clearSearchFilter", key);
+  };
+
   return (
     <View className="memberUnit">
       <CustomSearch
@@ -134,15 +154,19 @@ const MemberUnit: React.FC = () => {
         onChangeSearchFilter={(info) => onChangeSearchFilter(info)}
         navigateTo={(url) => Taro.navigateTo({ url })}
         onClickClear={(key) => {
-          setSearchFilter({
-            ...searchFilter,
-            [searchKey[key]]: "",
-          });
+          clearSearchFilter(key);
         }}
       />
-      {memberUnitList.map((item) => (
-        <CollectionItem key={item.id} item={item} />
-      ))}
+
+      <>
+        {memberUnitList.length > 0 &&
+          memberUnitList.map((item) => (
+            <CollectionItem key={item.id} item={item} />
+          ))}
+        {!memberUnitList.length && (
+          <View className="no-data">暂无会员单位数据</View>
+        )}
+      </>
     </View>
   );
 };

@@ -9,6 +9,13 @@ export const getMemberUnitList = (params: MemberUnitSearchParams) => {
 };
 
 /**
+ * 分页查询会员单位列表
+ */
+export const getMemberUnitPageListPage = (params: MemberUnitSearchParams) => {
+  return httpRequest.get("/api/app/open/company/page", params);
+};
+
+/**
  * @description 查询会员单位详情
  * @param params
  * @returns
@@ -101,5 +108,17 @@ export const addMemberUnitCustomer = (params: any) => {
 export const removeMemberUnitCustomer = (params: { customerId: string }) => {
   return httpRequest.post(
     `/api/app/company/removeCustomer/${params.customerId}`,
+  );
+};
+
+/**
+ * @description 查询有效广告列表
+ * @param params
+ * @returns
+ */
+export const getEffectiveAnnouncementList = (params: any) => {
+  return httpRequest.get(
+    "/api/app/advertisement/getEffectiveAnnouncement",
+    params,
   );
 };

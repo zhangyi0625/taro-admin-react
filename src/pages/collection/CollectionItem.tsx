@@ -14,6 +14,13 @@ const CollectionItem: React.FC<CollectionItemProps> = ({ item }) => {
   const getImageList = useCallback(() => {
     return item.images ? item.images.map((i) => i.id) : [];
   }, [item.images]);
+
+  const previewImage = (imagePath: string) => {
+    Taro.previewImage({
+      urls: [imagePath],
+      current: imagePath,
+    });
+  };
   return (
     <View
       key={item.id}
@@ -57,7 +64,12 @@ const CollectionItem: React.FC<CollectionItemProps> = ({ item }) => {
       <View className="collection-item-img">
         {item.images?.slice(0, 3)?.map((img) => (
           <View key={img.id} className="collection-item-img-item">
-            <Image style={{ width: "100%", height: "100%" }} src={img.id} />
+            <Image
+              style={{ width: "100%", height: "100%" }}
+              src={img.imagePath}
+              mode="aspectFill"
+              onClick={() => previewImage(img.imagePath)}
+            />
           </View>
         ))}
       </View>

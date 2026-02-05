@@ -37,6 +37,43 @@
     }
     &-item {
       padding-top: 40rpx;
+
+      .waterfall-container {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20rpx;
+      }
+
+      .waterfall-column {
+        width: calc(50% - 10rpx);
+        display: flex;
+        flex-direction: column;
+        gap: 20rpx;
+      }
+
+      .waterfall-item {
+        width: 100%;
+        border-radius: 8rpx;
+        box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+      }
+
+      .unitGeneral-image {
+        width: 100%;
+      }
+    }
+    &-image {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 20rpx;
+      .unitGeneral-image-1 {
+        // width: calc(50% - 10rpx);
+        margin-bottom: 20rpx;
+        max-height: 240rpx;
+        border-radius: 12rpx;
+      }
+      .unitGeneral-image-1:nth-child(2n) {
+        max-height: 253rpx;
+      }
     }
   }
 }

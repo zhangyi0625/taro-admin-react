@@ -105,7 +105,6 @@ const EditCustomer: React.FC = () => {
             onInput={(e) => setParams({ ...params, position: e.detail.value })}
             className="edit-customer-form-item-input"
             placeholder="请输入员工职位"
-            disabled={true}
           />
         </View>
         <View className="edit-customer-form-item">
