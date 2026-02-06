@@ -3,35 +3,24 @@ import type { MemberUnitDetailType } from "../../service/memberUnit/memberUnitMo
 import DefaultLogo from "../../images/icon/default-logo.svg";
 import "./index.scss";
 import { levelOptions, memberUnitLevelOptions } from "../index/config";
-import { useCallback } from "react";
 import Taro from "@tarojs/taro";
+import { previewImage } from "../../utils/tools";
 
 export type CollectionItemProps = {
   item: MemberUnitDetailType;
 };
 
 const CollectionItem: React.FC<CollectionItemProps> = ({ item }) => {
-  const getImageList = useCallback(() => {
-    return item.images ? item.images.map((i) => i.id) : [];
-  }, [item.images]);
-
-  const previewImage = (imagePath: string) => {
-    Taro.previewImage({
-      urls: [imagePath],
-      current: imagePath,
-    });
-  };
   return (
-    <View
-      key={item.id}
-      className="collection-item"
-      onClick={() =>
-        Taro.navigateTo({
-          url: "/pages/memberUnit/memberUnitDetail/index?id=" + item.id,
-        })
-      }
-    >
-      <View className="inline-flex">
+    <View key={item.id} className="collection-item">
+      <View
+        className="inline-flex"
+        onClick={() =>
+          Taro.navigateTo({
+            url: "/pages/memberUnit/memberUnitDetail/index?id=" + item.id,
+          })
+        }
+      >
         <Image
           className="collection-item-logo"
           src={item.logoPath ?? DefaultLogo}
@@ -68,7 +57,12 @@ const CollectionItem: React.FC<CollectionItemProps> = ({ item }) => {
               style={{ width: "100%", height: "100%" }}
               src={img.imagePath}
               mode="aspectFill"
-              onClick={() => previewImage(img.imagePath)}
+              onClick={() =>
+                previewImage(
+                  img.imagePath,
+                  item.images.slice(0, 3).map((i) => i.imagePath),
+                )
+              }
             />
           </View>
         ))}

@@ -8,6 +8,7 @@ import {
 } from "../../service/memberUnit/memberUnitApi";
 import "./index.scss";
 import Taro from "@tarojs/taro";
+import { previewImage } from "../../utils/tools";
 
 const IndustryDynamics: React.FC = () => {
   const [industryNews, setIndustryNews] = useState<IndustryNewsDetailType[]>(
@@ -64,13 +65,6 @@ const IndustryDynamics: React.FC = () => {
     });
   };
 
-  const previewImage = (url: string) => {
-    Taro.previewImage({
-      current: url, // 当前显示图片的http链接
-      urls: [url], // 需要预览的图片http链接列表
-    });
-  };
-
   return (
     <View className="industryDynamics">
       <View className="industryDynamics-tab">
@@ -95,7 +89,9 @@ const IndustryDynamics: React.FC = () => {
               src={item.mainImagePath}
               className="image"
               mode="aspectFill"
-              onClick={() => previewImage(item.mainImagePath)}
+              onClick={() =>
+                previewImage(item.mainImagePath, [item.mainImagePath])
+              }
             />
             <View className="flex-col" onClick={() => handleClick(item)}>
               <Text className="text-container">{item.title}</Text>

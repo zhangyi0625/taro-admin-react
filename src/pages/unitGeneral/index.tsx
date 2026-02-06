@@ -8,6 +8,7 @@ import { getIndustryColumnList } from "../../service/memberUnit/memberUnitApi";
 import BannerImg from "../../images/unitGeneral-bg.png";
 import { useCallback, useState } from "react";
 import { UnitGeneralIndustryColumnType } from "../../service/memberUnit/memberUnitModel";
+import { previewImage } from "../../utils/tools";
 
 const unitGeneral: React.FC = () => {
   const [industryColumnList, setIndustryColumnList] = useState<
@@ -68,30 +69,15 @@ const unitGeneral: React.FC = () => {
         />
       );
     } else {
-      // setContentType("image");
       return getImageList(items.imagePath ?? []);
     }
   }, [defaultUnitGeneral, industryColumnList]);
 
-  const previewImage = (imageId: string) => {
-    Taro.previewImage({
-      urls: [imageId],
-      current: imageId,
-    });
-  };
-
   const getImageList = (imageIds: string[]) => {
-    console.log(
-      imageIds,
-      "imageIds",
-      imageIds.filter((_, index) => index % 2 === 0),
-      industryColumnList.findIndex((i) => i.columnName === defaultUnitGeneral),
-    );
-
     return imageIds.map((item) => (
       <Image
         src={item}
-        onClick={() => previewImage(item)}
+        onClick={() => previewImage(item, imageIds)}
         className={`unitGeneral-image unitGeneral-image-${industryColumnList.findIndex((i) => i.columnName === defaultUnitGeneral)}`}
         mode={
           industryColumnList.findIndex(
@@ -102,39 +88,6 @@ const unitGeneral: React.FC = () => {
         }
       />
     ));
-    // return <View>11111</View>;
-
-    // return (
-    //   <View className="waterfall-container">
-    //     1111
-    //     <View className="waterfall-column">
-    //       {imageIds
-    //         .filter((_, index) => index % 2 === 0)
-    //         .map((item, index) => {
-    //           return (
-    //             <Image
-    //               key={item}
-    //               src={item}
-    //               className="waterfall-item"
-    //               mode="widthFix"
-    //             />
-    //           );
-    //         })}
-    //     </View>
-    //     <View className="waterfall-column">
-    //       {imageIds
-    //         .filter((_, index) => index % 2 === 1)
-    //         .map((item, index) => (
-    //           <Image
-    //             key={item}
-    //             src={item}
-    //             className="waterfall-item"
-    //             mode="widthFix"
-    //           />
-    //         ))}
-    //     </View>
-    //   </View>
-    // );
   };
 
   return (

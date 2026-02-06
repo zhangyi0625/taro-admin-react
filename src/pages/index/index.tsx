@@ -7,7 +7,6 @@ import {
   useDidShow,
   usePullDownRefresh,
   useReady,
-  useLoad,
 } from "@tarojs/taro";
 import Taro from "@tarojs/taro";
 import BannerImg from "../../images/banner.png";
@@ -22,13 +21,12 @@ import type {
 } from "../../service/memberUnit/memberUnitModel";
 import {
   getEffectiveAnnouncementList,
-  getIndustryColumnList,
   getIndustryNewsList,
   getMemberUnitList,
 } from "../../service/memberUnit/memberUnitApi";
 import { wechatLogin } from "../../service/user/userApi";
 import { levelOptions, memberUnitLevelOptions } from "./config";
-import { previewFile } from "../../service/upload/uploadApi";
+import { previewImage } from "../../utils/tools";
 
 // #region 书写注意
 //
@@ -175,13 +173,6 @@ const Index: React.FC = () => {
     });
   };
 
-  const previewImage = (url: string) => {
-    Taro.previewImage({
-      current: url, // 当前显示图片的http链接
-      urls: [url], // 需要预览的图片http链接列表
-    });
-  };
-
   const jumpEither = () => {
     Taro.setStorageSync("url", advertisement?.[0]?.link || "");
     Taro.setStorageSync("wxTitle", advertisement?.[0]?.title || "");
@@ -291,7 +282,9 @@ const Index: React.FC = () => {
                 src={item.mainImagePath ?? defaultLogo}
                 className="main-image"
                 mode="aspectFill"
-                onClick={() => previewImage(item.mainImagePath)}
+                onClick={() =>
+                  previewImage(item.mainImagePath, [item.mainImagePath])
+                }
               />
               <View
                 className="index-memberUnit-item-name"
