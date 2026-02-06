@@ -166,6 +166,12 @@ const MemberUnitDetail = () => {
   }, [customerList]);
 
   const goToDynamic = (id: string) => {
+    if (!getToken()) {
+      Taro.navigateTo({
+        url: "/pages/login/index",
+      });
+      return;
+    }
     Taro.navigateTo({
       url: "/pages/dynamic/dynamicForm/index?id=" + id,
     });
@@ -376,16 +382,14 @@ const MemberUnitDetail = () => {
                   </View>
                 </View>
               </View>
-              {getToken() && (
-                <View
-                  className="dynamic"
-                  onClick={() => {
-                    goToDynamic(item.id);
-                  }}
-                >
-                  留言
-                </View>
-              )}
+              <View
+                className="dynamic"
+                onClick={() => {
+                  goToDynamic(item.id);
+                }}
+              >
+                留言
+              </View>
             </View>
           ))}
         </View>

@@ -21,3 +21,15 @@ export const submitCustomerMessage = (params: {
 }) => {
   return httpRequest.post("/api/app/customer-message", params);
 };
+
+/**
+ * @description 回复留言
+ * @param params
+ * @returns
+ */
+export const replyCustomerMessage = (params: {
+  id: string;
+  replyContent: string;
+}) => {
+  return httpRequest.post("/api/app/customer-message/reply", params);
+};

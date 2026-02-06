@@ -31,5 +31,47 @@
       color: #909399;
       margin-top: 12rpx;
     }
+    &-btn {
+      width: 172rpx;
+      height: 72rpx;
+      line-height: 72rpx;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #edeff2;
+      border-radius: 36rpx;
+      font-weight: 400;
+      font-size: 28rpx;
+      color: #303133;
+      .icon {
+        width: 32rpx;
+        height: 32rpx;
+        margin-right: 12rpx;
+      }
+    }
+    &-replyContent {
+      background: #f5f7fa;
+      border-radius: 12rpx;
+      padding: 24rpx;
+      font-weight: 400;
+      font-size: 28rpx;
+      color: #909399;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      margin-top: 42rpx;
+    }
+    &-replyContent::before {
+      content: "";
+      display: block;
+      width: 0;
+      height: 0;
+      border-left: 12rpx solid transparent;
+      border-right: 12rpx solid transparent;
+      border-bottom: 12rpx solid #f5f7fa;
+      position: absolute;
+      top: -12rpx;
+      left: 40rpx;
+    }
   }
 }

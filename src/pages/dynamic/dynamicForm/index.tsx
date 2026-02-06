@@ -3,10 +3,15 @@ import { useLoad } from "@tarojs/taro";
 import { useState } from "react";
 import "./index.scss";
 import Taro from "@tarojs/taro";
-import { submitCustomerMessage } from "../../../service/dynamic/dynamicApi";
+import {
+  replyCustomerMessage,
+  submitCustomerMessage,
+} from "../../../service/dynamic/dynamicApi";
 
 const dynamicForm = () => {
   const [customerId, setCustomerId] = useState<string>("");
+
+  const [isReply, setIsReply] = useState<boolean>(false);
 
   const [dynamicFormInfo, setDynamicFormInfo] = useState<{
     content: string;
@@ -14,7 +19,14 @@ const dynamicForm = () => {
     content: "",
   });
   useLoad((options) => {
-    setCustomerId(options.id || "");
+    console.log(options, "options");
+    if (options?.type === "reply") {
+      setCustomerId(options.id || "");
+      setIsReply(true);
+    } else {
+      setCustomerId(options.id || "");
+      setIsReply(false);
+    }
     setDynamicFormInfo({ content: "" });
   });
 
@@ -27,13 +39,18 @@ const dynamicForm = () => {
       return;
     }
     try {
-      const res: any = await submitCustomerMessage({
-        receiverId: customerId,
-        content: dynamicFormInfo.content,
-      });
+      const res: any = isReply
+        ? await replyCustomerMessage({
+            id: customerId,
+            replyContent: dynamicFormInfo.content,
+          })
+        : await await submitCustomerMessage({
+            receiverId: customerId,
+            content: dynamicFormInfo.content,
+          });
       if (res.code === 200) {
         Taro.showToast({
-          title: "提交成功",
+          title: isReply ? "回复成功" : "提交成功",
           icon: "success",
         });
         setTimeout(() => {

@@ -1,9 +1,10 @@
 import { View, Text, Image } from "@tarojs/components";
 import "./index.scss";
 import { useState } from "react";
-import Taro, { useLoad } from "@tarojs/taro";
+import Taro, { useDidShow, useLoad } from "@tarojs/taro";
 import { getCustomerMessageList } from "../../service/dynamic/dynamicApi";
 import AvatarIcon from "../../images/icon/avatar.svg";
+import IconReply from "../../images/icon/reply.svg";
 
 const Dynamic: React.FC = () => {
   const [dynamic, setDynamic] = useState<any>([]);
@@ -16,6 +17,10 @@ const Dynamic: React.FC = () => {
     Taro.setNavigationBarTitle({
       title: Number(options.direction) === 1 ? "发出的留言" : "收到的留言",
     });
+  });
+
+  useDidShow(() => {
+    direction === 2 && init(2);
   });
 
   const init = async (direction?: number) => {
@@ -37,6 +42,12 @@ const Dynamic: React.FC = () => {
       }, 2000);
     }
   };
+
+  const reply = (item: { id: string }) => {
+    Taro.navigateTo({
+      url: `/pages/dynamic/dynamicForm/index?id=${item.id}&type=reply`,
+    });
+  };
   return (
     <View className="dynamic">
       {dynamic.map((item: any) => (
@@ -53,7 +64,7 @@ const Dynamic: React.FC = () => {
             <View className="flex-col">
               <View>
                 {direction === 2 ? item.senderName : item.receiverName}
-                <Text style={{ color: "##FA8C16", marginLeft: "12rpx" }}>
+                <Text style={{ color: "#FA8C16", marginLeft: "12rpx" }}>
                   {direction === 2
                     ? item.senderPosition
                     : item.receiverPosition}
@@ -74,6 +85,23 @@ const Dynamic: React.FC = () => {
           )}
           <View className="dynamic-item-content">{item.content}</View>
           <View className="dynamic-item-time">时间：{item.createTime}</View>
+          {direction === 2 && !item.replyContent && (
+            <View
+              className="inline-flex"
+              style={{ justifyContent: "flex-end", marginTop: "12rpx" }}
+            >
+              <View className="dynamic-item-btn" onClick={() => reply(item)}>
+                <Image className="icon" src={IconReply} />
+                回复
+              </View>
+            </View>
+          )}
+          {direction === 2 && item.replyContent && (
+            <View className="dynamic-item-replyContent">
+              <View>我的留言</View>
+              <View className="text-normal">{item.replyContent}</View>
+            </View>
+          )}
         </View>
       ))}
     </View>

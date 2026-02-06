@@ -21,10 +21,10 @@ export const levelOptions = [
     value: 4,
     icon: V4,
   },
-  {
-    value: 5,
-    icon: V5,
-  },
+  // {
+  //   value: 5,
+  //   icon: V5,
+  // },
 ];
 
 export const memberUnitLevelOptions = [
@@ -37,15 +37,11 @@ export const memberUnitLevelOptions = [
     value: 3,
   },
   {
-    label: "理事单位",
+    label: "理事/监事单位",
     value: 5,
   },
   {
-    label: "监事单位",
-    value: 7,
-  },
-  {
     label: "会员单位",
-    value: 9,
+    value: 7,
   },
 ];
