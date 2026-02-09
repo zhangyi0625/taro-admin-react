@@ -12,6 +12,8 @@ export default defineAppConfig({
     "pages/affiliate/index",
     "pages/collection/index",
     "pages/dynamic/index",
+    "pages/logistics-tracking/index",
+    "pages/logistics-tracking/logistics-tracking-detail/index",
     "pages/dynamic/dynamicForm/index",
     "pages/unitGeneral/index",
     "pages/application/ApplicationForm/index",

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>icon/关闭</title>
+    <g id="箱货跟踪" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="06-船名航次信息" transform="translate(-345, -384)" fill="#303133">
+            <g id="编组" transform="translate(0, 367)">
+                <g id="icon/关闭" transform="translate(346.75, 18.75)">
+                    <polygon id="图标颜色" points="7.25 6.19318182 1.05681818 7.31012473e-15 1.79162241e-14 1.05681818 6.19318182 7.25 3.55271368e-15 13.4431818 1.05681818 14.5 7.25 8.30681818 13.4431818 14.5 14.5 13.4431818 8.30681818 7.25 14.5 1.05681818 13.4431818 1.77635684e-15"></polygon>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

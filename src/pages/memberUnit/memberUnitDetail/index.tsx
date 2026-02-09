@@ -1,7 +1,7 @@
 import { View, Text, Image, Button } from "@tarojs/components";
 import "./index.scss";
 import { useDidShow, useLoad } from "@tarojs/taro";
-import { useCallback, useState } from "react";
+import React, { useCallback, useState } from "react";
 import type {
   IndustryNewsDetailType,
   MemberUnitCustomerType,
@@ -25,16 +25,20 @@ import {
   favoriteCompany,
   getFavoriteCompanyList,
 } from "../../../service/collection/collectionApi";
+import MemberUnitBaseInfo from "./components/MemberUnitBaseInfo";
+import MemberUnitPicture from "./components/MemberUnitPicture";
+import MemberUnitPerson from "./components/MemberUnitPerson";
+
+export type TabsItems = {
+  title: string;
+  children: React.ReactNode;
+};
 
 const MemberUnitDetail = () => {
   const [memberUnitDetail, setMemberUnitDetail] =
     useState<MemberUnitDetailType>();
 
   const [id, setId] = useState<string>();
-
-  const getToken = useCallback(() => {
-    return Taro.getStorageSync("token");
-  }, []);
 
   const [isCollection, setIsCollection] = useState<boolean>(false);
 
@@ -43,6 +47,48 @@ const MemberUnitDetail = () => {
   );
 
   const [imageList, setImageList] = useState<string[]>([]);
+
+  const [defaultTab, setDefaultTab] = useState<string>("企业信息");
+
+  const goToDynamic = (id: string) => {
+    if (!getToken()) {
+      Taro.navigateTo({
+        url: "/pages/login/index",
+      });
+      return;
+    }
+    Taro.navigateTo({
+      url: "/pages/dynamic/dynamicForm/index?id=" + id,
+    });
+  };
+
+  const Tabs: TabsItems[] = [
+    {
+      title: "企业信息",
+      children: (
+        <MemberUnitBaseInfo
+          memberUnitDetail={memberUnitDetail as MemberUnitDetailType}
+        />
+      ),
+    },
+    {
+      title: "企业图鉴",
+      children: <MemberUnitPicture imageList={imageList} />,
+    },
+    {
+      title: "企业成员",
+      children: (
+        <MemberUnitPerson
+          customerList={customerList}
+          goToDynamic={goToDynamic}
+        />
+      ),
+    },
+  ];
+
+  const getToken = useCallback(() => {
+    return Taro.getStorageSync("token");
+  }, []);
 
   useLoad((options) => {
     setId(options.id ?? "");
@@ -85,7 +131,6 @@ const MemberUnitDetail = () => {
   };
 
   useDidShow(() => {
-    // init()
     Taro.setBackgroundColor({
       backgroundColor: "#167fff",
     });
@@ -104,14 +149,7 @@ const MemberUnitDetail = () => {
         getMemberUnitImage({ companyId: id || "" }),
       ]).then((res: any) => {
         setMemberUnitDetail(res[0]);
-        setCustomerList(
-          res[1] ?? [],
-          // .filter(
-          //   (i) =>
-          //     i.id !== Taro.getStorageSync("userInfo")?.id &&
-          //     Taro.getStorageSync("userInfo")?.companyMaster,
-          // ) ?? [],
-        );
+        setCustomerList(res[1] ?? []);
         setImageList(
           res[2].map((i: { imagePath: string }) => i.imagePath) ?? [],
         );
@@ -164,18 +202,6 @@ const MemberUnitDetail = () => {
     }
     return result ?? [];
   }, [customerList]);
-
-  const goToDynamic = (id: string) => {
-    if (!getToken()) {
-      Taro.navigateTo({
-        url: "/pages/login/index",
-      });
-      return;
-    }
-    Taro.navigateTo({
-      url: "/pages/dynamic/dynamicForm/index?id=" + id,
-    });
-  };
 
   return (
     <View className="memberUnitDetail">
@@ -257,7 +283,23 @@ const MemberUnitDetail = () => {
           </View>
         </View>
       </View>
-      <View className="memberUnitDetail-remark" style={{ marginTop: "0" }}>
+      <View className="memberUnitDetail-tabs">
+        {Tabs.map((item) => (
+          <View
+            key={item.title}
+            className={
+              item.title === defaultTab
+                ? "memberUnitDetail-tabs-item active"
+                : "memberUnitDetail-tabs-item"
+            }
+            onClick={() => setDefaultTab(item.title)}
+          >
+            {item.title}
+          </View>
+        ))}
+      </View>
+      {Tabs.find((i) => i.title === defaultTab)?.children}
+      {/* <View className="memberUnitDetail-remark" style={{ marginTop: "0" }}>
         <View className="memberUnitDetail-remark-title">企业简介</View>
         <View>
           <Text className="gray">
@@ -393,7 +435,7 @@ const MemberUnitDetail = () => {
             </View>
           ))}
         </View>
-      )}
+      )} */}
     </View>
   );
 };

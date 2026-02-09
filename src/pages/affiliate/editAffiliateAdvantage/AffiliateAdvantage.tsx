@@ -19,6 +19,7 @@ import {
   updateAffiliateInfo,
 } from "../../../service/affiliate/affiliateApi";
 import { AffiliateInfoType } from "../../../service/affiliate/affiliateModel";
+import { otherPortOptions } from "./config";
 
 export type AffiliateAdvantageProps = {
   type: string;
@@ -211,8 +212,11 @@ const AffiliateAdvantage: React.FC<AffiliateAdvantageProps> = ({
     Partial<AffiliateInfoType>
   >({});
 
+  const [isOther, setIsOther] = useState(false);
+
   useEffect(() => {
     setOptions([]);
+    setIsOther(Taro.getStorageSync("isOther") === "true");
     type && init();
   }, [type, keyword]);
 
@@ -299,7 +303,19 @@ const AffiliateAdvantage: React.FC<AffiliateAdvantageProps> = ({
       }
       console.log(res, "res", options, selected, type);
       console.log(copyOptions, "copyOptions", keyword);
-
+      if (type === "por" && Taro.getStorageSync("isOther") === "true") {
+        console.log(
+          otherPortOptions,
+          "otherPortOptions",
+          isOther,
+          Taro.getStorageSync("isOther") === "true",
+        );
+        setCopyOptions(otherPortOptions);
+        setOptions(otherPortOptions);
+      }
+      setTimeout(() => {
+        Taro.removeStorageSync("isOther");
+      }, 500);
       Taro.hideLoading();
     } catch (err) {
       console.log(err, "err");

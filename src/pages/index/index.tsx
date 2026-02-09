@@ -70,7 +70,7 @@ const Index: React.FC = () => {
     {
       title: "入会申请",
       icon: IconApplication,
-      url: "/pages/application/index",
+      url: "/pages/logistics-tracking/index",
     },
     {
       title: "咨询热线",
