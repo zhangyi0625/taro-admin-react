@@ -131,9 +131,9 @@ const MemberUnitDetail = () => {
   };
 
   useDidShow(() => {
-    Taro.setBackgroundColor({
-      backgroundColor: "#167fff",
-    });
+    // Taro.setBackgroundColor({
+    //   backgroundColor: "#167fff",
+    // });
   });
 
   const init = async (id?: string) => {

@@ -1,15 +1,24 @@
-import { View, Text, Image } from "@tarojs/components";
+import { View, Text, Image, Textarea } from "@tarojs/components";
 import "./index.scss";
 import { useState } from "react";
 import Taro, { useDidShow, useLoad } from "@tarojs/taro";
-import { getCustomerMessageList } from "../../service/dynamic/dynamicApi";
+import {
+  getCustomerMessageList,
+  replyCustomerMessage,
+} from "../../service/dynamic/dynamicApi";
 import AvatarIcon from "../../images/icon/avatar.svg";
 import IconReply from "../../images/icon/reply.svg";
+import CloseIcon from "../../images/icon/close-icon.svg";
 
 const Dynamic: React.FC = () => {
   const [dynamic, setDynamic] = useState<any>([]);
 
   const [direction, setDirection] = useState<number>(1);
+
+  // 回复弹窗相关状态
+  const [replyVisible, setReplyVisible] = useState(false);
+  const [replyContent, setReplyContent] = useState("");
+  const [currentItem, setCurrentItem] = useState<any>(null);
 
   useLoad((options) => {
     init(options.direction || "");
@@ -43,10 +52,60 @@ const Dynamic: React.FC = () => {
     }
   };
 
-  const reply = (item: { id: string }) => {
-    Taro.navigateTo({
-      url: `/pages/dynamic/dynamicForm/index?id=${item.id}&type=reply`,
+  // 打开回复弹窗
+  const reply = (item: any) => {
+    setCurrentItem(item);
+    setReplyContent("");
+    setReplyVisible(true);
+  };
+
+  // 发送回复
+  const handleSendReply = async () => {
+    if (!replyContent.trim()) {
+      Taro.showToast({
+        title: "请输入回复内容",
+        icon: "none",
+      });
+      return;
+    }
+
+    Taro.showLoading({
+      title: "发送中...",
     });
+
+    try {
+      await replyCustomerMessage({
+        id: currentItem.id,
+        replyContent: replyContent,
+      });
+
+      // 更新本地列表
+      setDynamic((prev) =>
+        prev.map((item: any) => {
+          if (item.id === currentItem.id) {
+            return { ...item, replyContent };
+          }
+          return item;
+        }),
+      );
+
+      setReplyVisible(false);
+      setReplyContent("");
+      setCurrentItem(null);
+
+      Taro.showToast({
+        title: "回复成功",
+        icon: "success",
+      });
+    } catch (error) {
+      console.error("回复失败:", error);
+      Taro.showToast({
+        title: "回复失败，请重试",
+        icon: "none",
+      });
+    } finally {
+      Taro.hideLoading();
+    }
   };
   return (
     <View className="dynamic">
@@ -96,14 +155,50 @@ const Dynamic: React.FC = () => {
               </View>
             </View>
           )}
-          {direction === 2 && item.replyContent && (
+          {item.replyContent && (
             <View className="dynamic-item-replyContent">
-              <View>我的留言</View>
+              <View>{direction === 2 ? "我的回复" : "对方的回复"}</View>
               <View className="text-normal">{item.replyContent}</View>
             </View>
           )}
         </View>
       ))}
+
+      {/* 回复弹窗 */}
+      {replyVisible && (
+        <View className="reply-modal">
+          <View
+            className="reply-modal-overlay"
+            onClick={() => setReplyVisible(false)}
+          />
+          <View className="reply-modal-content">
+            <View className="reply-modal-header">
+              <Text className="reply-modal-title">
+                回复
+                {direction === 2
+                  ? currentItem?.senderName
+                  : currentItem?.receiverName}
+              </Text>
+              <Image
+                className="reply-modal-close"
+                src={CloseIcon}
+                onClick={() => setReplyVisible(false)}
+              />
+            </View>
+            <Textarea
+              className="reply-modal-input"
+              placeholder="请输入回复内容"
+              value={replyContent}
+              onInput={(e) => setReplyContent(e.detail.value)}
+            />
+            <View className="reply-modal-footer">
+              <View className="reply-modal-send" onClick={handleSendReply}>
+                发送
+              </View>
+            </View>
+          </View>
+        </View>
+      )}
     </View>
   );
 };

@@ -13,7 +13,7 @@ import BannerImg from "../../images/banner.png";
 import ArrowRight from "../../images/icon/arrow-icon.svg";
 import defaultLogo from "../../images/icon/default-logo.svg";
 import IconUnitGeneral from "../../images/icon/unitGeneral.svg";
-import IconApplication from "../../images/icon/application.svg";
+import IconApplication from "../../images/icon/logistics.svg";
 import IconConsulting from "../../images/icon/consulting.svg";
 import type {
   IndustryNewsDetailType,
@@ -68,7 +68,7 @@ const Index: React.FC = () => {
       url: "/pages/unitGeneral/index",
     },
     {
-      title: "入会申请",
+      title: "箱货跟踪",
       icon: IconApplication,
       url: "/pages/logistics-tracking/index",
     },
