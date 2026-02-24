@@ -17,10 +17,7 @@ import {
 import CustomSearch from "../../components/CustomSearch";
 import Taro from "@tarojs/taro";
 import CollectionItem from "../collection/CollectionItem";
-import {
-  getMemberUnitList,
-  getMemberUnitPageListPage,
-} from "../../service/memberUnit/memberUnitApi";
+import { getMemberUnitPageListPage } from "../../service/memberUnit/memberUnitApi";
 
 const MemberUnit: React.FC = () => {
   const [searchFilter, setSearchFilter] = useState<MemberUnitSearchParams>({

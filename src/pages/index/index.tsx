@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 import { View, Text, Image } from "@tarojs/components";
 import "./index.scss";
 import {
@@ -45,8 +44,6 @@ type indexFunItemsType = {
 };
 
 const Index: React.FC = () => {
-  const dispatch = useDispatch();
-
   const [memberUnit, setMemberUnit] = useState<Partial<MemberUnitDetailType>[]>(
     [],
   );
@@ -54,10 +51,6 @@ const Index: React.FC = () => {
   const [industryNews, setIndustryNews] = useState<IndustryNewsDetailType[]>(
     [],
   );
-
-  const [groupName, setGroupName] = useState<
-    { id: string; groupName: string }[]
-  >([]);
 
   const [advertisement, setAdvertisement] = useState<any[]>([]);
 

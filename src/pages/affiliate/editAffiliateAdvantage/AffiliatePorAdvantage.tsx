@@ -1,4 +1,3 @@
-import { View, Text, Image, Input } from "@tarojs/components";
 import "./index.scss";
 import AffiliateAdvantage from "./AffiliateAdvantage";
 import { useState } from "react";
@@ -12,10 +11,6 @@ const AffiliatePorAdvantage: React.FC<AffiliatePorAdvantageProps> = ({
   changeType = "choose",
 }) => {
   const [keyword, setKeyword] = useState<string>("");
-
-  const resetSearch = () => {
-    setKeyword("");
-  };
 
   return (
     <>

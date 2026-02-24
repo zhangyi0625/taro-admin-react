@@ -2,7 +2,6 @@ import { View, Button, Checkbox, Image } from "@tarojs/components";
 import { useEffect, useState } from "react";
 import "./index.scss";
 import {
-  getBusinessAdvantage,
   getCarrierAdvantage,
   getPortAdvantage,
   getRouteAdvantage,
@@ -188,7 +187,6 @@ const MemberUnitManageAdvantageOptions = [
 
 const ApiMap = {
   por: getPortAdvantage,
-  // business: getBusinessAdvantage,
   route: getRouteAdvantage,
   carrier: getCarrierAdvantage,
 };

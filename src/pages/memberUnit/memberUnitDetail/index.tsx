@@ -3,7 +3,6 @@ import "./index.scss";
 import { useDidShow, useLoad } from "@tarojs/taro";
 import React, { useCallback, useState } from "react";
 import type {
-  IndustryNewsDetailType,
   MemberUnitCustomerType,
   MemberUnitDetailType,
 } from "../../../service/memberUnit/memberUnitModel";
@@ -16,10 +15,7 @@ import {
   getMemberUnitDetail,
 } from "../../../service/memberUnit/memberUnitApi";
 import Taro from "@tarojs/taro";
-import ArrowRight from "../../../images/icon/arrow-icon.svg";
-import IconChange from "../../../images/icon/change.svg";
 import FavoriteIcon from "../../../images/icon/favorite.svg";
-import Avatar from "../../../images/icon/avatar.svg";
 import {
   cancelFavoriteCompany,
   favoriteCompany,
@@ -72,10 +68,6 @@ const MemberUnitDetail = () => {
       ),
     },
     {
-      title: "企业图鉴",
-      children: <MemberUnitPicture imageList={imageList} />,
-    },
-    {
       title: "企业成员",
       children: (
         <MemberUnitPerson
@@ -83,6 +75,10 @@ const MemberUnitDetail = () => {
           goToDynamic={goToDynamic}
         />
       ),
+    },
+    {
+      title: "企业图鉴",
+      children: <MemberUnitPicture imageList={imageList} />,
     },
   ];
 
@@ -225,7 +221,9 @@ const MemberUnitDetail = () => {
             onClick={changeCollection}
           >
             <Image src={FavoriteIcon} className="collection-icon" />
-            <Text className="collection-text">收藏</Text>
+            <Text className="collection-text">
+              {isCollection ? "已收藏" : "收藏"}
+            </Text>
           </View>
           <Button
             openType="share"

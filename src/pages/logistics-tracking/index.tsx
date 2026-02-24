@@ -8,7 +8,6 @@ import {
   getLogisticsTrackingList,
   getLogisticsTrackingQuery,
 } from "../../service/user/userApi";
-import { TrackingScheduleInfoBySort } from "./config";
 import clearIcon from "../../images/icon/clear-icon.png";
 
 const LogisticsTracking = () => {
@@ -17,8 +16,6 @@ const LogisticsTracking = () => {
   const [orderNo, setOrderNo] = useState("");
 
   const [logisticsTracking, setLogisticsTracking] = useState<any>([]);
-
-  const [options, setOptions] = useState<any>(TrackingScheduleInfoBySort);
 
   useDidShow(() => {
     let info = Taro.getStorageSync("porSelected");
@@ -42,7 +39,6 @@ const LogisticsTracking = () => {
       console.log(err);
     }
   };
-  //EGLV143562537938
   useDidHide(() => {
     setTimeout(() => {
       Taro.removeStorageSync("porSelected");
