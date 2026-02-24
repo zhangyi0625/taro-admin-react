@@ -71,15 +71,3 @@ export const removeMemberUnitCustomer = (params: { customerId: string }) => {
     `/api/app/company/removeCustomer/${params.customerId}`,
   );
 };
-
-/**
- * @description 查询有效广告列表
- * @param params
- * @returns
- */
-export const getEffectiveAnnouncementList = (params: any) => {
-  return httpRequest.get(
-    "/api/app/advertisement/getEffectiveAnnouncement",
-    params,
-  );
-};

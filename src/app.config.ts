@@ -1,7 +1,6 @@
 export default defineAppConfig({
   pages: [
     "pages/index/index",
-    "pages/home/index",
     "pages/memberUnit/index",
     "pages/affiliate/editAffiliateImage/index",
     "pages/affiliate/editAffiliateAdvantage/index",

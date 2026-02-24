@@ -11,19 +11,20 @@ import Taro from "@tarojs/taro";
 import BannerImg from "../../images/banner.png";
 import ArrowRight from "../../images/icon/arrow-icon.svg";
 import defaultLogo from "../../images/icon/default-logo.svg";
-import IconUnitGeneral from "../../images/icon/unitGeneral.svg";
-import IconApplication from "../../images/icon/logistics.svg";
-import IconConsulting from "../../images/icon/consulting.svg";
+
 import type { MemberUnitDetailType } from "../../service/memberUnit/memberUnitModel";
 import { getIndustryNewsList } from "../../service/industry-trends/industry-trendsApi";
-import {
-  getMemberUnitList,
-  getEffectiveAnnouncementList,
-} from "../../service/memberUnit/memberUnitApi";
+import { getMemberUnitList } from "../../service/memberUnit/memberUnitApi";
+import { getEffectiveAnnouncementList } from "../../service/advertising/advertisingApi";
 import { IndustryNewsDetailType } from "../../service/industry-trends/industry-trendsModel";
 import { wechatLogin } from "../../service/auth/authApi";
-import { levelOptions, memberUnitLevelOptions } from "./config";
+import {
+  FunItemsOptions,
+  levelOptions,
+  memberUnitLevelOptions,
+} from "./config";
 import { previewImage } from "../../utils/tools";
+import { AdvertisementContentType } from "../../service/advertising/advertisingModel";
 
 // #region 书写注意
 //
@@ -35,12 +36,6 @@ import { previewImage } from "../../utils/tools";
 //
 // #endregion
 
-type indexFunItemsType = {
-  title: string;
-  icon: string;
-  url: string;
-};
-
 const Index: React.FC = () => {
   const [memberUnit, setMemberUnit] = useState<Partial<MemberUnitDetailType>[]>(
     [],
@@ -50,30 +45,12 @@ const Index: React.FC = () => {
     [],
   );
 
-  const [advertisement, setAdvertisement] = useState<any[]>([]);
-
-  const FunItemsOptions: indexFunItemsType[] = [
-    {
-      title: "协会概况",
-      icon: IconUnitGeneral,
-      url: "/pages/unitGeneral/index",
-    },
-    {
-      title: "箱货跟踪",
-      icon: IconApplication,
-      url: "/pages/logistics-tracking/index",
-    },
-    {
-      title: "咨询热线",
-      icon: IconConsulting,
-      url: "/pages/consulting/index",
-    },
-  ];
+  const [advertisement, setAdvertisement] = useState<
+    AdvertisementContentType[]
+  >([]);
 
   // 可以使用所有的 React Hooks
-  useEffect(() => {
-    // console.log("useEffect");
-  }, []);
+  useEffect(() => {}, []);
 
   const init = async () => {
     try {
@@ -84,11 +61,9 @@ const Index: React.FC = () => {
           order: "desc",
         }),
         getIndustryNewsList(),
-        // getIndustryColumnList(),
       ]).then((res: any) => {
         setMemberUnit(res[0]);
         setIndustryNews(res[1]);
-        // setGroupName(res[2]);
       });
     } catch (err) {
       console.log(err);
@@ -112,9 +87,7 @@ const Index: React.FC = () => {
 
   const loadAdvertisement = async () => {
     try {
-      const resp: any = await getEffectiveAnnouncementList({});
-      console.log(resp, "resp");
-
+      const resp: any = await getEffectiveAnnouncementList();
       setAdvertisement(
         resp ? [resp] : [{ imagePath: BannerImg, link: "", title: "" }],
       );
