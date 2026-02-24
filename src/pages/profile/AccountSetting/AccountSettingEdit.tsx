@@ -3,7 +3,7 @@ import Taro, { useDidShow } from "@tarojs/taro";
 import { useLoad } from "@tarojs/taro";
 import "./accountSettingEdit.scss";
 import { useState } from "react";
-import { sendCode, updatePassword } from "../../../service/user/userApi";
+import { sendCode, updatePassword } from "../../../service/auth/authApi";
 import { UserInfoParams } from "../../../service/user/userModel";
 
 const AccountSettingEdit: React.FC = () => {

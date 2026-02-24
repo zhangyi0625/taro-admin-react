@@ -2,14 +2,14 @@ import { View, Text, Image, Input, Button } from "@tarojs/components";
 import "./index.scss";
 import Taro, { useDidShow } from "@tarojs/taro";
 import Logo from "../../images/logo.png";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import {
   passwordLogin,
   phoneLogin,
   postBindWechat,
   sendCode,
   wechatLogin,
-} from "../../service/user/userApi";
+} from "../../service/auth/authApi";
 
 const Login: React.FC = () => {
   const regex = /^1[3-9]\d{9}$/;

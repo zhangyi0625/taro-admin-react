@@ -117,7 +117,11 @@ const Message: React.FC = () => {
               </View>
             )}
             {imgList && (
-              <Image className="message-form-item-avatar" src={imgList} />
+              <Image
+                className="message-form-item-avatar"
+                mode="aspectFill"
+                src={imgList}
+              />
             )}
             <Image className="arrow-icon" src={ArrowRight} />
           </View>

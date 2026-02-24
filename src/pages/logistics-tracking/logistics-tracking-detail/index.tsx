@@ -8,7 +8,7 @@ import { useLoad } from "@tarojs/taro";
 import {
   getLogisticsTrackingDetail,
   updateLogisticsTracking,
-} from "../../../service/user/userApi";
+} from "../../../service/logistics-tracking/logistics-trackingApi";
 import Taro from "@tarojs/taro";
 
 const LogisticsTrackingDetail = () => {

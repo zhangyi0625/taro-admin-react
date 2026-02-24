@@ -14,16 +14,14 @@ import defaultLogo from "../../images/icon/default-logo.svg";
 import IconUnitGeneral from "../../images/icon/unitGeneral.svg";
 import IconApplication from "../../images/icon/logistics.svg";
 import IconConsulting from "../../images/icon/consulting.svg";
-import type {
-  IndustryNewsDetailType,
-  MemberUnitDetailType,
-} from "../../service/memberUnit/memberUnitModel";
+import type { MemberUnitDetailType } from "../../service/memberUnit/memberUnitModel";
+import { getIndustryNewsList } from "../../service/industry-trends/industry-trendsApi";
 import {
-  getEffectiveAnnouncementList,
-  getIndustryNewsList,
   getMemberUnitList,
+  getEffectiveAnnouncementList,
 } from "../../service/memberUnit/memberUnitApi";
-import { wechatLogin } from "../../service/user/userApi";
+import { IndustryNewsDetailType } from "../../service/industry-trends/industry-trendsModel";
+import { wechatLogin } from "../../service/auth/authApi";
 import { levelOptions, memberUnitLevelOptions } from "./config";
 import { previewImage } from "../../utils/tools";
 

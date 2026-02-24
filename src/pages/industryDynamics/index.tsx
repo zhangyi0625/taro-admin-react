@@ -1,11 +1,11 @@
 import { View, Text, Image } from "@tarojs/components";
 import { useDidShow } from "@tarojs/taro";
 import { useState } from "react";
-import { IndustryNewsDetailType } from "../../service/memberUnit/memberUnitModel";
+import { IndustryNewsDetailType } from "../../service/industry-trends/industry-trendsModel";
 import {
   getIndustryNewsList,
   getIndustryColumnGroupList,
-} from "../../service/memberUnit/memberUnitApi";
+} from "../../service/industry-trends/industry-trendsApi";
 import "./index.scss";
 import Taro from "@tarojs/taro";
 import { previewImage } from "../../utils/tools";

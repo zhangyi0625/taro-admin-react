@@ -1,7 +1,7 @@
 import { View, Text } from "@tarojs/components";
 import "./index.scss";
 import Taro, { useDidShow } from "@tarojs/taro";
-import { getIndustryColumnList } from "../../service/memberUnit/memberUnitApi";
+import { getIndustryColumnList } from "../../service/industry-trends/industry-trendsApi";
 import { useState } from "react";
 
 const Application: React.FC = () => {

@@ -4,10 +4,10 @@ import { useLoad } from "@tarojs/taro";
 import Taro from "@tarojs/taro";
 import "@tarojs/taro/html.css";
 import "@tarojs/taro/html5.css";
-import { getIndustryColumnList } from "../../service/memberUnit/memberUnitApi";
+import { getIndustryColumnList } from "../../service/industry-trends/industry-trendsApi";
 import BannerImg from "../../images/unitGeneral-bg.png";
 import { useCallback, useState } from "react";
-import { UnitGeneralIndustryColumnType } from "../../service/memberUnit/memberUnitModel";
+import { UnitGeneralIndustryColumnType } from "../../service/industry-trends/industry-trendsModel";
 import { previewImage } from "../../utils/tools";
 
 const unitGeneral: React.FC = () => {

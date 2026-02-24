@@ -11,7 +11,7 @@ import Collection from "../../images/icon/collect.svg";
 import Communication from "../../images/icon/communicate.svg";
 import SendCommunication from "../../images/icon/send-communication.svg";
 import { UserInfoParams } from "../../service/user/userModel";
-import { getUserDetail, wechatLogin } from "../../service/user/userApi";
+import { wechatLogin } from "../../service/auth/authApi";
 
 type ProfileItemsType = {
   title: string;
@@ -22,14 +22,15 @@ type ProfileItemsType = {
 
 const Profile: React.FC = () => {
   const [userInfo, setUserInfo] = useState<Partial<UserInfoParams>>({});
+  const [loading, setLoading] = useState<boolean>(true);
 
   useDidShow(() => {
     refreshUserInfo();
   });
 
   const refreshUserInfo = async () => {
+    setLoading(true);
     try {
-      //
       await Taro.login({
         success: async function (res) {
           if (res.code) {
@@ -37,21 +38,17 @@ const Profile: React.FC = () => {
             if (resp) {
               console.log(resp.data, "resp.data");
               Taro.setStorageSync("token", resp.accessToken);
-              // Taro.setStorageSync("userInfo", resp.customer);
               setUserInfo(resp.customer || {});
               Taro.setStorageSync("userInfo", resp.customer);
             }
-            console.log(resp, "resp");
             Taro.setStorageSync("isFirstLogin", resp ? true : false);
-          } else {
           }
         },
       });
-      // const resp: any = await getUserDetail();
-      // setUserInfo(resp.customer || {});
-      // Taro.setStorageSync("userInfo", resp.customer);
+      setLoading(false);
     } catch (err) {
       console.log(err);
+      setLoading(false);
     }
   };
 
@@ -110,21 +107,37 @@ const Profile: React.FC = () => {
     <View className="profile">
       <View className="profile-title">
         <View className="inline-flex">
-          <Image src={userInfo?.avatarPath ?? Avatar} className="avatar" />
-          {userInfo?.name ? (
-            <View className="flex-col">
-              <Text className="nickname">{userInfo?.name}</Text>
-              <Text className="phone">{userInfo?.phone}</Text>
-            </View>
+          {loading ? (
+            <>
+              <View className="skeleton-avatar"></View>
+              <View className="flex-col">
+                <View className="skeleton skeleton-nickname"></View>
+                <View className="skeleton skeleton-phone"></View>
+              </View>
+            </>
           ) : (
-            <View
-              onClick={() => Taro.navigateTo({ url: "/pages/login/index" })}
-            >
-              登录/注册
-            </View>
+            <>
+              <Image
+                src={userInfo?.avatarPath ?? Avatar}
+                mode="aspectFill"
+                className="avatar"
+              />
+              {userInfo?.name ? (
+                <View className="flex-col">
+                  <Text className="nickname">{userInfo?.name}</Text>
+                  <Text className="phone">{userInfo?.phone}</Text>
+                </View>
+              ) : (
+                <View
+                  onClick={() => Taro.navigateTo({ url: "/pages/login/index" })}
+                >
+                  登录/注册
+                </View>
+              )}
+            </>
           )}
         </View>
-        {userInfo.name && (
+        {!loading && userInfo.name && (
           <View
             className="setting"
             onClick={() =>

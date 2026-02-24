@@ -3,9 +3,12 @@ import Taro, { useDidShow } from "@tarojs/taro";
 import { useState } from "react";
 import "./index.scss";
 import ArrowRight from "../../../images/icon/arrow-icon.svg";
+import { UserInfoParams } from "../../../service/user/userModel";
 
 const AccountSetting: React.FC = () => {
-  const [userInfo, setUserInfo] = useState<any>({});
+  const [userInfo, setUserInfo] = useState<UserInfoParams>(
+    {} as UserInfoParams,
+  );
 
   useDidShow(() => {
     setUserInfo(Taro.getStorageSync("userInfo") ?? {});
@@ -24,14 +27,7 @@ const AccountSetting: React.FC = () => {
   return (
     <View className="accountSetting">
       <View className="accountSetting-form">
-        <View
-          className="accountSetting-form-item"
-          // onClick={() =>
-          //   Taro.navigateTo({
-          //     url: "/pages/profile/AccountSetting/AccountSettingEdit/index",
-          //   })
-          // }
-        >
+        <View className="accountSetting-form-item">
           <Text>手机号</Text>
           <View className="right">
             <View>{userInfo.phone ?? ""}</View>

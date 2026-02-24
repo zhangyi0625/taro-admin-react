@@ -7,7 +7,7 @@ import Taro from "@tarojs/taro";
 import {
   getLogisticsTrackingList,
   getLogisticsTrackingQuery,
-} from "../../service/user/userApi";
+} from "../../service/logistics-tracking/logistics-trackingApi";
 import clearIcon from "../../images/icon/clear-icon.png";
 
 const LogisticsTracking = () => {

@@ -2,7 +2,7 @@ import httpRequest from "../../utils/http";
 
 /**
  * @description 查询留言列表
- * @param params
+ * @param params 查询参数
  * @returns
  */
 
@@ -12,7 +12,7 @@ export const getCustomerMessageList = (params?: { direction: number }) => {
 
 /**
  * @description 提交留言
- * @param params
+ * @param params 提交参数
  * @returns
  */
 export const submitCustomerMessage = (params: {
@@ -24,7 +24,7 @@ export const submitCustomerMessage = (params: {
 
 /**
  * @description 回复留言
- * @param params
+ * @param params 回复参数
  * @returns
  */
 export const replyCustomerMessage = (params: {
