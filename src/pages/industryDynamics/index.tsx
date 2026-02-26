@@ -94,7 +94,7 @@ const IndustryDynamics: React.FC = () => {
               }
             />
             <View className="flex-col" onClick={() => handleClick(item)}>
-              <Text className="text-container">{item.title}</Text>
+              <Text className="line-clamp-2">{item.title}</Text>
               <View className="inline-flex">
                 <Text className="name">{item.groupName}</Text>
                 <Text className="date">{item.updateTime}</Text>

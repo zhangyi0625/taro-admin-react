@@ -153,7 +153,8 @@ const Index: React.FC = () => {
           <Image
             src={advertisement?.[0]?.imagePath}
             onClick={jumpEither}
-            className="banner"
+            // className="banner"
+            className="w-[100%] h-[100%]"
           />
         </View>
         <View className="index-function">
@@ -254,7 +255,7 @@ const Index: React.FC = () => {
                 className="index-memberUnit-item-name"
                 onClick={() => handleClick(item)}
               >
-                <Text className="text-container">{item.title}</Text>
+                <Text className="line-clamp-2">{item.title}</Text>
                 <View className="index-memberUnit-item-level" key={item.id}>
                   <Text className="group-name">{item.groupName}</Text>
                   <Text className="level-text">{item.updateTime}</Text>

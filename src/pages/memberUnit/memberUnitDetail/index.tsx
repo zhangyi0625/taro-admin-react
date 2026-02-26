@@ -122,7 +122,10 @@ const MemberUnitDetail = () => {
         setIsCollection(false);
       }
     } catch (err) {
-      console.log(err);
+      Taro.showToast({
+        title: err.message,
+        icon: "none",
+      });
     }
   };
 

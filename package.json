@@ -27,7 +27,8 @@
     "dev:rn": "npm run build:rn -- --watch",
     "dev:qq": "npm run build:qq -- --watch",
     "dev:jd": "npm run build:jd -- --watch",
-    "dev:quickapp": "npm run build:quickapp -- --watch"
+    "dev:quickapp": "npm run build:quickapp -- --watch",
+    "postinstall": "weapp-tw patch"
   },
   "browserslist": [
     "defaults and fully supports es6-module",
@@ -50,14 +51,14 @@
     "@tarojs/runtime": "4.1.6",
     "@tarojs/shared": "4.1.6",
     "@tarojs/taro": "4.1.6",
+    "lodash-es": "^4.17.21",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-redux": "^7.2.0",
     "redux": "^4.0.0",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
-    "taro-axios": "^1.1.1",
-    "lodash-es": "^4.17.21"
+    "taro-axios": "^1.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.8.0",
@@ -70,18 +71,21 @@
     "@typescript-eslint/eslint-plugin": "^6.2.0",
     "@typescript-eslint/parser": "^6.2.0",
     "@vitejs/plugin-react": "^4.1.0",
+    "autoprefixer": "^10.4.24",
     "babel-preset-taro": "4.1.6",
     "eslint": "^8.12.0",
     "eslint-config-taro": "4.1.6",
     "eslint-plugin-import": "^2.12.0",
     "eslint-plugin-react": "^7.8.2",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "postcss": "^8.4.18",
+    "postcss": "^8.5.6",
     "react-refresh": "^0.11.0",
     "sass": "^1.60.0",
     "stylelint": "^14.4.0",
+    "tailwindcss": "^3.4.16",
     "terser": "^5.16.8",
     "typescript": "^5.1.0",
-    "vite": "^4.2.0"
+    "vite": "^4.2.0",
+    "weapp-tailwindcss": "^4.10.3"
   }
 }

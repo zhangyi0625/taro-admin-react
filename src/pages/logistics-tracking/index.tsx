@@ -8,7 +8,7 @@ import {
   getLogisticsTrackingList,
   getLogisticsTrackingQuery,
 } from "../../service/logistics-tracking/logistics-trackingApi";
-import clearIcon from "../../images/icon/clear-icon.png";
+// import clearIcon from "../../images/icon/clear-icon.png";
 
 const LogisticsTracking = () => {
   const [startPort, setStartPort] = useState<any>({});
@@ -18,11 +18,18 @@ const LogisticsTracking = () => {
   const [logisticsTracking, setLogisticsTracking] = useState<any>([]);
 
   useDidShow(() => {
-    let info = Taro.getStorageSync("porSelected");
+    let info = Taro.getStorageSync("porSelected") || {
+      cnName: "宁波",
+      code: "CNNBO",
+      id: "248000103",
+      enName: "Ningbo",
+      countryName: "China",
+      countryLocalName: "中国",
+    };
     // setStartPort(info?.advantagePor || "");
     // setOrderNo(info?.advantageFnd || "");
     console.log(info, "info");
-    setStartPort(info ?? {});
+    setStartPort(info);
     init();
   });
 
@@ -94,14 +101,14 @@ const LogisticsTracking = () => {
               disabled={true}
               placeholder="请选择起运港"
               type="text"
-              onClick={() => changePort()}
+              // onClick={() => changePort()}
               value={
                 startPort.cnName
                   ? startPort.cnName + "-" + startPort.enName
                   : ""
               }
             />
-            <View className="inline-flex">
+            {/* <View className="inline-flex">
               {startPort.cnName && (
                 <Image
                   src={clearIcon}
@@ -110,7 +117,7 @@ const LogisticsTracking = () => {
                 />
               )}
               <Image src={ArrowRight} className="arrow-icon" />
-            </View>
+            </View> */}
           </View>
           <View className="search-item" style={{ marginTop: "20rpx" }}>
             <Input
