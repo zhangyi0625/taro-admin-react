@@ -2,6 +2,7 @@ import { View, Text, Image, Textarea } from "@tarojs/components";
 import "./index.scss";
 import { useState } from "react";
 import Taro, { useDidShow, useLoad } from "@tarojs/taro";
+import IconEmpty from "../../images/icon/empty.svg";
 import {
   getCustomerMessageList,
   replyCustomerMessage,
@@ -109,60 +110,78 @@ const Dynamic: React.FC = () => {
   };
   return (
     <View className="dynamic">
-      {dynamic.map((item: any) => (
-        <View key={item.id} className="dynamic-item">
-          <View className="inline-flex">
-            <Image
-              className="dynamic-item-avatar"
-              src={
-                direction === 1
-                  ? (item.receiverAvatar ?? AvatarIcon)
-                  : (item.senderAvatar ?? AvatarIcon)
-              }
-            />
-            <View className="flex-col">
-              <View>
-                {direction === 2 ? item.senderName : item.receiverName}
-                <Text style={{ color: "#FA8C16", marginLeft: "12rpx" }}>
-                  {direction === 2
-                    ? item.senderPosition
-                    : item.receiverPosition}
-                </Text>
+      {dynamic.length ? (
+        <>
+          {dynamic.map((item: any) => (
+            <View key={item.id} className="dynamic-item">
+              <View className="inline-flex">
+                <Image
+                  className="dynamic-item-avatar"
+                  src={
+                    direction === 1
+                      ? (item.receiverAvatar ?? AvatarIcon)
+                      : (item.senderAvatar ?? AvatarIcon)
+                  }
+                />
+                <View className="flex-col">
+                  <View>
+                    {direction === 2 ? item.senderName : item.receiverName}
+                    <Text style={{ color: "#FA8C16", marginLeft: "12rpx" }}>
+                      {direction === 2
+                        ? item.senderPosition
+                        : item.receiverPosition}
+                    </Text>
+                  </View>
+                  <View
+                    className="dynamic-item-time"
+                    style={{ marginBottom: "none" }}
+                  >
+                    {direction === 2
+                      ? item.senderCompanyName
+                      : item.receiverCompanyName}
+                  </View>
+                </View>
               </View>
-              <View
-                className="dynamic-item-time"
-                style={{ marginBottom: "none" }}
-              >
-                {direction === 2
-                  ? item.senderCompanyName
-                  : item.receiverCompanyName}
-              </View>
+              {direction === 2 && (
+                <View className="dynamic-item-phone">
+                  电话：{item.senderPhone}
+                </View>
+              )}
+              <View className="dynamic-item-content">{item.content}</View>
+              <View className="dynamic-item-time">时间：{item.createTime}</View>
+              {direction === 2 && !item.replyContent && (
+                <View
+                  className="inline-flex"
+                  style={{ justifyContent: "flex-end", marginTop: "12rpx" }}
+                >
+                  <View
+                    className="dynamic-item-btn"
+                    onClick={() => reply(item)}
+                  >
+                    <Image className="icon" src={IconReply} />
+                    回复
+                  </View>
+                </View>
+              )}
+              {item.replyContent && (
+                <View className="dynamic-item-replyContent">
+                  <View>{direction === 2 ? "我的回复" : "对方的回复"}</View>
+                  <View className="text-normal">{item.replyContent}</View>
+                </View>
+              )}
             </View>
-          </View>
-          {direction === 2 && (
-            <View className="dynamic-item-phone">电话：{item.senderPhone}</View>
-          )}
-          <View className="dynamic-item-content">{item.content}</View>
-          <View className="dynamic-item-time">时间：{item.createTime}</View>
-          {direction === 2 && !item.replyContent && (
-            <View
-              className="inline-flex"
-              style={{ justifyContent: "flex-end", marginTop: "12rpx" }}
-            >
-              <View className="dynamic-item-btn" onClick={() => reply(item)}>
-                <Image className="icon" src={IconReply} />
-                回复
-              </View>
-            </View>
-          )}
-          {item.replyContent && (
-            <View className="dynamic-item-replyContent">
-              <View>{direction === 2 ? "我的回复" : "对方的回复"}</View>
-              <View className="text-normal">{item.replyContent}</View>
-            </View>
-          )}
+          ))}
+        </>
+      ) : (
+        <View className="flex-col flex items-center text-[#909399] pt-[200px]">
+          <Image
+            src={IconEmpty}
+            mode="aspectFill"
+            className="w-[190px] h-[200px] mb-[20px]"
+          ></Image>
+          暂无数据
         </View>
-      ))}
+      )}
 
       {/* 回复弹窗 */}
       {replyVisible && (
