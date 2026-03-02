@@ -1,7 +1,6 @@
 import { View, Image } from "@tarojs/components";
-import Taro, { useDidShow } from "@tarojs/taro";
+import Taro, { useDidShow, usePullDownRefresh } from "@tarojs/taro";
 import { useState } from "react";
-import "./index.scss";
 import CollectionItem from "./CollectionItem";
 import IconEmpty from "../../images/icon/empty.svg";
 import { MemberUnitDetailType } from "../../service/memberUnit/memberUnitModel";
@@ -16,26 +15,34 @@ const Collection: React.FC = () => {
     init();
   });
 
+  usePullDownRefresh(() => {
+    init();
+  });
+
   const init = async () => {
     Taro.showLoading({
-      title: "加载中",
+      title: "收藏列表加载中",
     });
     try {
       const res: any = await getFavoriteCompanyList();
       setCollection(res ?? []);
       setTimeout(function () {
         Taro.hideLoading();
-      }, 2000);
+      }, 1000);
     } catch (err) {
-      console.log(err);
+      Taro.stopPullDownRefresh();
+      Taro.showToast({
+        title: err.message || "收藏列表加载失败",
+        icon: "none",
+      });
       setTimeout(function () {
         Taro.hideLoading();
-      }, 2000);
+      }, 1000);
     }
   };
 
   return (
-    <View className="collection">
+    <View className="bg-[#f5f7fa] h-screen">
       {collection.length ? (
         <>
           {collection.map((item: MemberUnitDetailType) => (
