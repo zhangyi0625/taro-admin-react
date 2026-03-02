@@ -1,7 +1,7 @@
 import { View, Text, Button, Input, Image } from "@tarojs/components";
 import Taro, { useDidShow } from "@tarojs/taro";
-import { useEffect, useState } from "react";
-import "./index.scss";
+import { useState } from "react";
+import clsx from "clsx";
 import ArrowRight from "../../images/icon/arrow-icon.svg";
 import { UserInfoParams } from "../../service/user/userModel";
 import { saveUserInfo } from "../../service/user/userApi";
@@ -11,29 +11,20 @@ const Message: React.FC = () => {
 
   const [imgList, setImgList] = useState<string>("");
 
-  useDidShow(() => {
-    // setParams({
-    //   ...params,
-    //   ...Taro.getStorageSync("userInfo"),
-    // });
-    // setImgList((params?.avatarPath as string) ?? "");
-    // console.log(
-    //   params,
-    //   "params.avatarPath",
-    //   imgList,
-    //   Taro.getStorageSync("userInfo"),
-    // );
-  });
+  const itemsClass = clsx(
+    "flex items-center text-[28px] px-[24px] py-[32px] border-b-[1rpx] border-[#f5f7fa]",
+  );
 
-  useEffect(() => {
+  const saveButtonClass = clsx(
+    "h-[88rpx] leading-[88rpx] text-center text-[32rpx] bg-[#1677ff] text-[#ffffff] rounded-[12rpx]",
+  );
+
+  useDidShow(() => {
     setParams({
       ...Taro.getStorageSync("userInfo"),
     });
     setImgList(Taro.getStorageSync("userInfo")?.avatarPath ?? "");
-    console.log(params, "params.avatarPath", imgList, {
-      ...Taro.getStorageSync("userInfo"),
-    });
-  }, []);
+  });
 
   const changeAvatar = () => {
     Taro.chooseImage({
@@ -102,13 +93,14 @@ const Message: React.FC = () => {
     }
   };
   return (
-    <View className="message">
-      <View className="message-form">
-        <View className="message-form-item">
-          <Text className="message-form-item-label">头像</Text>
+    <View className="message h-screen bg-[#f5f5f5] overflow-hidden py-[20px] px-[24px]">
+      <View className="message-form bg-[#ffffff] rounded-[16rpx] mb-[20px]">
+        <View className={itemsClass}>
+          <Text className="text-right pr-[24px] min-w-[80px] whitespace-nowrap">
+            头像
+          </Text>
           <View
-            className="inline-flex message-form-item-input"
-            style={{ justifyContent: "space-between" }}
+            className="w-full flex items-center flex-1 justify-between"
             onClick={changeAvatar}
           >
             {!imgList && (
@@ -118,7 +110,7 @@ const Message: React.FC = () => {
             )}
             {imgList && (
               <Image
-                className="message-form-item-avatar"
+                className="w-[120px] h-[120px] rounded-[50%]"
                 mode="aspectFill"
                 src={imgList}
               />
@@ -126,51 +118,55 @@ const Message: React.FC = () => {
             <Image className="arrow-icon" src={ArrowRight} />
           </View>
         </View>
-        <View className="message-form-item">
-          <Text className="message-form-item-label">
-            <Text style={{ color: "red" }}>*</Text>姓名
+        <View className={itemsClass}>
+          <Text className="text-right pr-[24px] min-w-[80px] whitespace-nowrap">
+            <Text className="text-[#ff4949]">*</Text>姓名
           </Text>
           <Input
             value={params?.name}
             onInput={(e) => setParams({ ...params, name: e.detail.value })}
-            className="message-form-item-input"
+            className="flex-1 w-full"
             placeholder="输入姓名"
           />
         </View>
-        <View className="message-form-item">
-          <Text className="message-form-item-label">
-            <Text style={{ color: "red" }}>*</Text>职务
+        <View className={itemsClass}>
+          <Text className="text-right pr-[24px] min-w-[80px] whitespace-nowrap">
+            <Text className="text-[#ff4949]">*</Text>职务
           </Text>
           <Input
             value={params?.position as string}
             onInput={(e) => setParams({ ...params, position: e.detail.value })}
-            className="message-form-item-input"
+            className="flex-1 w-full"
             placeholder="输入你的职位"
           />
         </View>
-        <View className="message-form-item">
-          <Text className="message-form-item-label">邮箱</Text>
+        <View className={itemsClass}>
+          <Text className="text-right pr-[24px] min-w-[80px] whitespace-nowrap">
+            邮箱
+          </Text>
           <Input
             value={params?.email as string}
             onInput={(e) => setParams({ ...params, email: e.detail.value })}
-            className="message-form-item-input"
+            className="flex-1 w-full"
             placeholder="输入常用邮箱"
           />
         </View>
-        <View className="message-form-item">
-          <Text className="message-form-item-label">企业</Text>
+        <View className={itemsClass}>
+          <Text className="text-right pr-[24px] min-w-[80px] whitespace-nowrap">
+            企业
+          </Text>
           <Input
             value={params?.companyName as string}
             onInput={(e) =>
               setParams({ ...params, companyName: e.detail.value })
             }
-            className="message-form-item-input"
+            className="flex-1 w-full"
             placeholder="未绑定（请联系企业管理员进行绑定）"
             disabled={true}
           />
         </View>
       </View>
-      <Button className="message-btn" onClick={saveMessage}>
+      <Button className={saveButtonClass} onClick={saveMessage}>
         保存
       </Button>
     </View>

@@ -79,6 +79,27 @@ const Index: React.FC = () => {
   useDidShow(() => {
     // console.log("useDidShow");
     getFirstLogin();
+    Taro.getSetting({
+      withSubscriptions: true,
+      success: function (res) {
+        console.log(res.authSetting);
+        // res.authSetting = {
+        //   "scope.userInfo": true,
+        //   "scope.userLocation": true
+        // }
+      },
+    });
+    Taro.requestSubscribeMessage({
+      tmplIds: [
+        "8HgTcrM9RFkrY37cJAE2C80kFx6-nKHzLN2SL5Whpj8",
+        "g3Svp_zkJ6cCCs8ZVXh3JAu3gqyOuuRVSxOjhOzWfW4",
+      ],
+      entityIds: [
+        "8HgTcrM9RFkrY37cJAE2C80kFx6-nKHzLN2SL5Whpj8",
+        "g3Svp_zkJ6cCCs8ZVXh3JAu3gqyOuuRVSxOjhOzWfW4",
+      ],
+      success: async (result) => {},
+    });
     setTimeout(() => {
       init();
       loadAdvertisement();
@@ -148,35 +169,38 @@ const Index: React.FC = () => {
 
   return (
     <View className="index">
-      <View className="index-title">
-        <View className="index-banner">
+      <View className="bg-[#ffffff] p-[20px]">
+        <View className="h-[360px] rounded-[16px] overflow-hidden">
           <Image
             src={advertisement?.[0]?.imagePath}
             onClick={jumpEither}
-            // className="banner"
             className="w-[100%] h-[100%]"
           />
         </View>
-        <View className="index-function">
+        <View className="index-function grid grid-cols-3 gap-[20px] mt-[32px]">
           {FunItemsOptions.map((item) => (
             <View
-              className="index-function-item"
+              className="index-function-item flex items-center flex-col text-[#303133]"
               key={item.title}
               onClick={() =>
                 Taro.navigateTo({ url: item.url + "?name=" + item.title })
               }
             >
-              <Image src={item.icon} className="icon" />
+              <Image
+                src={item.icon}
+                className="w-[106px] h-[106px] mb-[16px]"
+              />
               <Text>{item.title}</Text>
             </View>
           ))}
         </View>
       </View>
       <View className="index-memberUnit">
-        <View className="index-memberUnit-title">
-          <Text>会员中心</Text>
+        <View className="p-[24px] flex items-center justify-between border-b-[1px] border-[#edeff2]">
+          <Text className="font-semibold text-[32rpx] text-[#303133]">
+            会员单位
+          </Text>
           <View
-            className="more"
             onClick={() =>
               Taro.switchTab({
                 url: "/pages/memberUnit/index",
@@ -226,12 +250,13 @@ const Index: React.FC = () => {
       </View>
       <View className="index-dynamic">
         <View
-          className="index-memberUnit-title"
+          className="p-[24px] flex items-center justify-between border-b-[1px] border-[#edeff2]"
           style={{ borderBottom: "none" }}
         >
-          <Text>行业动态</Text>
+          <Text className="font-semibold text-[32rpx] text-[#303133]">
+            行业动态
+          </Text>
           <View
-            className="more"
             onClick={() =>
               Taro.navigateTo({ url: "/pages/industryDynamics/index" })
             }

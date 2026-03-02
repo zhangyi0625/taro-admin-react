@@ -3,6 +3,7 @@ import { defineConfig, type UserConfigExport } from "@tarojs/cli";
 import devConfig from "./dev";
 import prodConfig from "./prod";
 import tailwindcss from "tailwindcss";
+import path from "path";
 import { UnifiedViteWeappTailwindcssPlugin as uvtw } from "weapp-tailwindcss/vite";
 
 // https://taro-docs.jd.com/docs/next/config#defineconfig-辅助函数
@@ -51,6 +52,9 @@ export default defineConfig<"vite">(async (merge, { command, mode }) => {
           injectAdditionalCssVarScope: true,
         }),
       ] as Plugin[], // 从 vite 引入 type, 为了智能提示
+    },
+    alias: {
+      "@/utils": path.resolve(__dirname, "..", "src/utils"),
     },
     mini: {
       postcss: {

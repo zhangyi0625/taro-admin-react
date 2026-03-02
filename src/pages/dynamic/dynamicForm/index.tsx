@@ -39,27 +39,41 @@ const dynamicForm = () => {
       return;
     }
     try {
-      const res: any = isReply
-        ? await replyCustomerMessage({
-            id: customerId,
-            replyContent: dynamicFormInfo.content,
-          })
-        : await await submitCustomerMessage({
-            receiverId: customerId,
-            content: dynamicFormInfo.content,
-          });
-      if (res.code === 200) {
-        Taro.showToast({
-          title: isReply ? "回复成功" : "提交成功",
-          icon: "success",
-        });
-        setTimeout(() => {
-          Taro.navigateBack();
-        }, 2000);
-      }
+      await Taro.requestSubscribeMessage({
+        tmplIds: [
+          "8HgTcrM9RFkrY37cJAE2C80kFx6-nKHzLN2SL5Whpj8",
+          // "g3Svp_zkJ6cCCs8ZVXh3JAu3gqyOuuRVSxOjhOzWfW4",
+        ],
+        entityIds: [
+          "8HgTcrM9RFkrY37cJAE2C80kFx6-nKHzLN2SL5Whpj8",
+          // "g3Svp_zkJ6cCCs8ZVXh3JAu3gqyOuuRVSxOjhOzWfW4",
+        ],
+        success: async (result) => {
+          // console.log(result, "result");
+          // return;
+          const res: any = isReply
+            ? await replyCustomerMessage({
+                id: customerId,
+                replyContent: dynamicFormInfo.content,
+              })
+            : await await submitCustomerMessage({
+                receiverId: customerId,
+                content: dynamicFormInfo.content,
+              });
+          if (res.code === 200) {
+            Taro.showToast({
+              title: isReply ? "回复成功" : "提交成功",
+              icon: "success",
+            });
+            setTimeout(() => {
+              Taro.navigateBack();
+            }, 2000);
+          }
+        },
+      });
     } catch (error) {
       Taro.showToast({
-        title: error.errMsg || "无法给自己留言",
+        title: error.message,
         icon: "none",
       });
     }

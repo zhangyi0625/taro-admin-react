@@ -75,28 +75,40 @@ const Dynamic: React.FC = () => {
     });
 
     try {
-      await replyCustomerMessage({
-        id: currentItem.id,
-        replyContent: replyContent,
-      });
+      await Taro.requestSubscribeMessage({
+        tmplIds: [
+          // "8HgTcrM9RFkrY37cJAE2C80kFx6-nKHzLN2SL5Whpj8",
+          "g3Svp_zkJ6cCCs8ZVXh3JAu3gqyOuuRVSxOjhOzWfW4",
+        ],
+        entityIds: [
+          // "8HgTcrM9RFkrY37cJAE2C80kFx6-nKHzLN2SL5Whpj8",
+          "g3Svp_zkJ6cCCs8ZVXh3JAu3gqyOuuRVSxOjhOzWfW4",
+        ],
+        success: async (result) => {
+          await replyCustomerMessage({
+            id: currentItem.id,
+            replyContent: replyContent,
+          });
 
-      // 更新本地列表
-      setDynamic((prev) =>
-        prev.map((item: any) => {
-          if (item.id === currentItem.id) {
-            return { ...item, replyContent };
-          }
-          return item;
-        }),
-      );
+          // 更新本地列表
+          setDynamic((prev) =>
+            prev.map((item: any) => {
+              if (item.id === currentItem.id) {
+                return { ...item, replyContent };
+              }
+              return item;
+            }),
+          );
 
-      setReplyVisible(false);
-      setReplyContent("");
-      setCurrentItem(null);
+          setReplyVisible(false);
+          setReplyContent("");
+          setCurrentItem(null);
 
-      Taro.showToast({
-        title: "回复成功",
-        icon: "success",
+          Taro.showToast({
+            title: "回复成功",
+            icon: "success",
+          });
+        },
       });
     } catch (error) {
       console.error("回复失败:", error);

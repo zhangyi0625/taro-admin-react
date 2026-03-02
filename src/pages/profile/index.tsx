@@ -105,8 +105,8 @@ const Profile: React.FC = () => {
 
   return (
     <View className="profile">
-      <View className="profile-title">
-        <View className="inline-flex">
+      <View className="mx-[24px] my-[40px] flex items-center justify-between">
+        <View className="flex items-center">
           {loading ? (
             <>
               <View className="skeleton-avatar"></View>
@@ -120,12 +120,14 @@ const Profile: React.FC = () => {
               <Image
                 src={userInfo?.avatarPath ?? Avatar}
                 mode="aspectFill"
-                className="avatar"
+                className="w-[116px] h-[116px] rounded-full mx-[24px]"
               />
               {userInfo?.name ? (
-                <View className="flex-col">
-                  <Text className="nickname">{userInfo?.name}</Text>
-                  <Text className="phone">{userInfo?.phone}</Text>
+                <View className="flex-col text-[#303133]">
+                  <Text className="text-[32px] font-semibold">
+                    {userInfo?.name}
+                  </Text>
+                  <Text className="text-[28px]">{userInfo?.phone}</Text>
                 </View>
               ) : (
                 <View
@@ -139,50 +141,56 @@ const Profile: React.FC = () => {
         </View>
         {!loading && userInfo.name && (
           <View
-            className="setting"
+            className="flex items-center p-[16px] rounded-[32px] bg-[#ffffff] text-[#333333] text-[26px]"
             onClick={() =>
               Taro.navigateTo({
                 url: "/pages/profile/AccountSetting/index",
               })
             }
           >
-            <Image src={Setting} className="setting-icon" />
+            <Image src={Setting} className="w-[32px] h-[32px] mr-[4px]" />
             账号设置
           </View>
         )}
       </View>
-      <View className="profile-content">
+      <View className="my-[40px] mx-[24px] rounded-[12px] bg-[#ffffff]">
         {ProfileItems().map(
           (item) =>
             item.isShow && (
               <View
-                className="profile-content-item"
+                className="flex items-center justify-between py-[30px] px-[24px]"
                 key={item.title}
                 onClick={() => jumpItem(item)}
               >
-                <View className="inline-flex">
-                  <Image src={item.icon} className="icon" />
-                  <Text>{item.title}</Text>
+                <View className="flex items-center">
+                  <Image
+                    src={item.icon}
+                    className="w-[44px] h-[44px] mr-[24px]"
+                  />
+                  <Text className="text-[28px]">{item.title}</Text>
                 </View>
-                <Image src={ArrowRight} className="arrow-icon" />
+                <Image src={ArrowRight} className="w-[16px] h-[24px]" />
               </View>
             ),
         )}
       </View>
-      <View className="profile-content">
+      <View className="my-[40px] mx-[24px] rounded-[12px] bg-[#ffffff] mt-[20px]">
         {ProfileLastItems().map(
           (item) =>
             item.isShow && (
               <View
-                className="profile-content-item"
+                className="flex items-center justify-between py-[30px] px-[24px]"
                 key={item.title}
                 onClick={() => jumpItem(item)}
               >
-                <View className="inline-flex">
-                  <Image src={item.icon} className="icon" />
-                  <Text>{item.title}</Text>
+                <View className="flex items-center">
+                  <Image
+                    src={item.icon}
+                    className="w-[44px] h-[44px] mr-[24px]"
+                  />
+                  <Text className="text-[28px]">{item.title}</Text>
                 </View>
-                <Image src={ArrowRight} className="arrow-icon" />
+                <Image src={ArrowRight} className="w-[16px] h-[24px]" />
               </View>
             ),
         )}
