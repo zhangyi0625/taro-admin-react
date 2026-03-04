@@ -77,9 +77,9 @@ const Login: React.FC = () => {
         loginType === "phone"
           ? await phoneLogin(loginParams)
           : await passwordLogin(loginParams);
-      if (res.data.code === 200) {
-        Taro.setStorageSync("token", res.data.data.accessToken);
-        Taro.setStorageSync("userInfo", res.data.data.customer);
+      if (res.accessToken) {
+        Taro.setStorageSync("token", res.accessToken);
+        Taro.setStorageSync("userInfo", res.customer);
         Taro.showToast({
           title: "登录成功",
           icon: "success",

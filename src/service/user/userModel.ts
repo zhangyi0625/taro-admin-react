@@ -12,4 +12,5 @@ export interface UserInfoParams {
   avatarPath: string | null;
   position: string | null;
   companyMaster: boolean;
+  telephone?: string | null;
 }

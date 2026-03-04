@@ -57,24 +57,6 @@ const MemberUnitSearchFilter = React.forwardRef<
       SearchFilterOptionsType[]
     >([
       {
-        label: "起运港",
-        value: "",
-        key: "porCode",
-        selectedKey: "porSelected",
-        jumpUrl:
-          "/pages/affiliate/editAffiliateAdvantage/index?type=por&name=优势起运港&changeType=search",
-        searchValue: "",
-      },
-      {
-        label: "目的港",
-        value: "",
-        key: "fndCode",
-        selectedKey: "fndSelected",
-        jumpUrl:
-          "/pages/affiliate/editAffiliateAdvantage/index?type=fnd&name=优势目的港&changeType=search",
-        searchValue: "",
-      },
-      {
         label: "船公司",
         value: "",
         key: "carrier",
@@ -90,6 +72,24 @@ const MemberUnitSearchFilter = React.forwardRef<
         selectedKey: "routeSelected",
         jumpUrl:
           "/pages/affiliate/editAffiliateAdvantage/index?type=route&name=优势航线&changeType=search",
+        searchValue: "",
+      },
+      {
+        label: "起运港",
+        value: "",
+        key: "porCode",
+        selectedKey: "porSelected",
+        jumpUrl:
+          "/pages/affiliate/editAffiliateAdvantage/index?type=por&name=优势起运港&changeType=search",
+        searchValue: "",
+      },
+      {
+        label: "目的港",
+        value: "",
+        key: "fndCode",
+        selectedKey: "fndSelected",
+        jumpUrl:
+          "/pages/affiliate/editAffiliateAdvantage/index?type=fnd&name=优势目的港&changeType=search",
         searchValue: "",
       },
     ]);
