@@ -4,7 +4,7 @@ import V3 from "../../images/icon/v3.png";
 import V4 from "../../images/icon/v4.png";
 import IconUnitGeneral from "../../images/icon/unitGeneral.svg";
 import IconApplication from "../../images/icon/logistics.svg";
-import IconConsulting from "../../images/icon/consulting.svg";
+import IconShippingSchedule from "../../images/icon/shippingSchedule.svg";
 
 export type indexFunItemsType = {
   title: string;
@@ -57,13 +57,13 @@ export const FunItemsOptions: indexFunItemsType[] = [
     url: "/pages/unitGeneral/index",
   },
   {
+    title: "船期查询",
+    icon: IconShippingSchedule,
+    url: "/pages/shippingSchedule/index",
+  },
+  {
     title: "箱货跟踪",
     icon: IconApplication,
     url: "/pages/logistics-tracking/index",
-  },
-  {
-    title: "咨询热线",
-    icon: IconConsulting,
-    url: "/pages/consulting/index",
   },
 ];

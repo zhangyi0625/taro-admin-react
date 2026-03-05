@@ -10,6 +10,7 @@ import Affiliate from "../../images/icon/affiliate.svg";
 import Collection from "../../images/icon/collect.svg";
 import Communication from "../../images/icon/communicate.svg";
 import SendCommunication from "../../images/icon/send-communication.svg";
+import IconConsulting from "../../images/icon/consulting.svg";
 import { UserInfoParams } from "../../service/user/userModel";
 import { wechatLogin } from "../../service/auth/authApi";
 
@@ -73,11 +74,6 @@ const Profile: React.FC = () => {
         url: "/pages/affiliate/index",
         isShow: getIsShow("companyMaster"),
       },
-    ];
-  }, [userInfo]);
-
-  const ProfileLastItems = useCallback(() => {
-    return [
       {
         title: "收藏企业",
         icon: Collection,
@@ -96,11 +92,54 @@ const Profile: React.FC = () => {
         url: "/pages/dynamic/index?direction=1",
         isShow: getIsShow("name"),
       },
+      {
+        title: "咨询热线",
+        icon: IconConsulting,
+        url: "/pages/consulting/index",
+        isShow: true,
+      },
     ];
   }, [userInfo]);
 
+  // const ProfileLastItems = useCallback(() => {
+  //   return [
+
+  //   ];
+  // }, [userInfo]);
+
   const jumpItem = (item: ProfileItemsType) => {
     Taro.navigateTo({ url: item.url });
+  };
+
+  const getProfileItemsMap: React.FC = () => {
+    let profileItemsMap = [
+      ProfileItems().slice(0, 2),
+      ProfileItems().slice(2, ProfileItems().length - 1),
+      ProfileItems().slice(ProfileItems().length - 1),
+    ];
+    return profileItemsMap.map((item) => (
+      <View className="my-[40px] mx-[24px] rounded-[12px] bg-[#ffffff]">
+        {item.map(
+          (item) =>
+            item.isShow && (
+              <View
+                className="flex items-center justify-between py-[30px] px-[24px]"
+                key={item.title}
+                onClick={() => jumpItem(item)}
+              >
+                <View className="flex items-center">
+                  <Image
+                    src={item.icon}
+                    className="w-[44px] h-[44px] mr-[24px]"
+                  />
+                  <Text className="text-[28px]">{item.title}</Text>
+                </View>
+                <Image src={ArrowRight} className="w-[16px] h-[24px]" />
+              </View>
+            ),
+        )}
+      </View>
+    ));
   };
 
   return (
@@ -153,48 +192,53 @@ const Profile: React.FC = () => {
           </View>
         )}
       </View>
-      <View className="my-[40px] mx-[24px] rounded-[12px] bg-[#ffffff]">
-        {ProfileItems().map(
-          (item) =>
-            item.isShow && (
-              <View
-                className="flex items-center justify-between py-[30px] px-[24px]"
-                key={item.title}
-                onClick={() => jumpItem(item)}
-              >
-                <View className="flex items-center">
-                  <Image
-                    src={item.icon}
-                    className="w-[44px] h-[44px] mr-[24px]"
-                  />
-                  <Text className="text-[28px]">{item.title}</Text>
+      {/* <View className="my-[40px] mx-[24px] rounded-[12px] bg-[#ffffff]">
+        {ProfileItems()
+          .slice(0, 2)
+          .map(
+            (item) =>
+              item.isShow && (
+                <View
+                  className="flex items-center justify-between py-[30px] px-[24px]"
+                  key={item.title}
+                  onClick={() => jumpItem(item)}
+                >
+                  <View className="flex items-center">
+                    <Image
+                      src={item.icon}
+                      className="w-[44px] h-[44px] mr-[24px]"
+                    />
+                    <Text className="text-[28px]">{item.title}</Text>
+                  </View>
+                  <Image src={ArrowRight} className="w-[16px] h-[24px]" />
                 </View>
-                <Image src={ArrowRight} className="w-[16px] h-[24px]" />
-              </View>
-            ),
-        )}
+              ),
+          )}
       </View>
       <View className="my-[40px] mx-[24px] rounded-[12px] bg-[#ffffff] mt-[20px]">
-        {ProfileLastItems().map(
-          (item) =>
-            item.isShow && (
-              <View
-                className="flex items-center justify-between py-[30px] px-[24px]"
-                key={item.title}
-                onClick={() => jumpItem(item)}
-              >
-                <View className="flex items-center">
-                  <Image
-                    src={item.icon}
-                    className="w-[44px] h-[44px] mr-[24px]"
-                  />
-                  <Text className="text-[28px]">{item.title}</Text>
+        {ProfileItems()
+          .slice(2, ProfileItems().length - 1)
+          .map(
+            (item) =>
+              item.isShow && (
+                <View
+                  className="flex items-center justify-between py-[30px] px-[24px]"
+                  key={item.title}
+                  onClick={() => jumpItem(item)}
+                >
+                  <View className="flex items-center">
+                    <Image
+                      src={item.icon}
+                      className="w-[44px] h-[44px] mr-[24px]"
+                    />
+                    <Text className="text-[28px]">{item.title}</Text>
+                  </View>
+                  <Image src={ArrowRight} className="w-[16px] h-[24px]" />
                 </View>
-                <Image src={ArrowRight} className="w-[16px] h-[24px]" />
-              </View>
-            ),
-        )}
-      </View>
+              ),
+          )}
+      </View> */}
+      {getProfileItemsMap({})}
     </View>
   );
 };

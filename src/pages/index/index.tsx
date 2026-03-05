@@ -25,6 +25,7 @@ import {
 } from "./config";
 import { previewImage } from "../../utils/tools";
 import { AdvertisementContentType } from "../../service/advertising/advertisingModel";
+import IndustryDynamicsItem from "../industryDynamics/IndustryDynamicsItem";
 
 // #region 书写注意
 //
@@ -267,26 +268,7 @@ const Index: React.FC = () => {
         </View>
         <View className="index-memberUnit-content">
           {industryNews.slice(0, 5).map((item) => (
-            <View className="index-memberUnit-item" key={item.id}>
-              <Image
-                src={item.mainImagePath ?? defaultLogo}
-                className="main-image"
-                mode="aspectFill"
-                onClick={() =>
-                  previewImage(item.mainImagePath, [item.mainImagePath])
-                }
-              />
-              <View
-                className="index-memberUnit-item-name"
-                onClick={() => handleClick(item)}
-              >
-                <Text className="line-clamp-2">{item.title}</Text>
-                <View className="index-memberUnit-item-level" key={item.id}>
-                  <Text className="group-name">{item.groupName}</Text>
-                  <Text className="level-text">{item.updateTime}</Text>
-                </View>
-              </View>
-            </View>
+            <IndustryDynamicsItem key={item.id} item={item} />
           ))}
         </View>
       </View>

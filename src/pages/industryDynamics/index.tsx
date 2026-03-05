@@ -1,14 +1,14 @@
-import { View, Text, Image } from "@tarojs/components";
+import { View } from "@tarojs/components";
 import { useDidShow } from "@tarojs/taro";
 import { useState } from "react";
+// import clsx from "clsx";
 import { IndustryNewsDetailType } from "../../service/industry-trends/industry-trendsModel";
 import {
   getIndustryNewsList,
   getIndustryColumnGroupList,
 } from "../../service/industry-trends/industry-trendsApi";
 import "./index.scss";
-import Taro from "@tarojs/taro";
-import { previewImage } from "../../utils/tools";
+import IndustryDynamicsItem from "./IndustryDynamicsItem";
 
 const IndustryDynamics: React.FC = () => {
   const [industryNews, setIndustryNews] = useState<IndustryNewsDetailType[]>(
@@ -33,8 +33,6 @@ const IndustryDynamics: React.FC = () => {
       ]).then((res: any) => {
         setIndustryNews(res[0] ?? []);
         setColumnGroup([{ id: "", name: "全部" }].concat(res[1]) ?? []);
-        // setIndustryNews(res);
-        console.log(res[1], "res", columnGroup, industryNews);
       });
     } catch (err) {
       console.log(err);
@@ -52,22 +50,12 @@ const IndustryDynamics: React.FC = () => {
     }
   };
 
-  const handleClick = (item: IndustryNewsDetailType) => {
-    Taro.setStorageSync(
-      item.url ? "url" : "content",
-      item.url ? item.url : JSON.stringify(item.content),
-    );
-    Taro.setStorageSync("wxTitle", item.title);
-    Taro.navigateTo({
-      url: `/pages/webview/index?content=${item.url ? item.url : item.content}&type=${
-        item.url ? "website" : "markdown"
-      }&title=${item.title}`,
-    });
-  };
-
   return (
-    <View className="industryDynamics">
-      <View className="industryDynamics-tab">
+    <View className="h-full bg-[#f5f7fa] industryDynamics">
+      <View
+        className="bg-[#ffffff] flex items-center overflow-x-scroll whitespace-nowrap"
+        style={{ padding: "26rpx 24rpx 26rpx 0" }}
+      >
         {columnGroup.map((item) => (
           <View
             key={item.id}
@@ -82,25 +70,9 @@ const IndustryDynamics: React.FC = () => {
           </View>
         ))}
       </View>
-      <View className="industryDynamics-content">
+      <View className="industryDynamics-content p-[24px] mt-[20px] bg-[#ffffff]">
         {industryNews.map((item) => (
-          <View key={item.id} className="industryDynamics-content-item">
-            <Image
-              src={item.mainImagePath}
-              className="image"
-              mode="aspectFill"
-              onClick={() =>
-                previewImage(item.mainImagePath, [item.mainImagePath])
-              }
-            />
-            <View className="flex-col" onClick={() => handleClick(item)}>
-              <Text className="line-clamp-2">{item.title}</Text>
-              <View className="inline-flex">
-                <Text className="name">{item.groupName}</Text>
-                <Text className="date">{item.updateTime}</Text>
-              </View>
-            </View>
-          </View>
+          <IndustryDynamicsItem key={item.id} item={item} />
         ))}
       </View>
     </View>
