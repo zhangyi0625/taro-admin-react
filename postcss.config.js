@@ -3,6 +3,11 @@ module.exports = {
   plugins: {
     tailwindcss: {},
     autoprefixer: {},
-    "weapp-tailwindcss": {},
+    "weapp-tailwindcss": {
+      // 配置 weapp-tailwindcss 插件
+      transformPages: true,
+      customAttributes: ["mode"],
+      disableModules: true,
+    },
   },
 };

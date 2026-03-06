@@ -1,0 +1,5 @@
+// 只在 H5 环境中导入 Tailwind CSS
+// 在小程序环境中，Tailwind CSS 会通过 weapp-tailwindcss 插件自动处理
+@use "tailwindcss/base" as *;
+@use "tailwindcss/components" as *;
+@use "tailwindcss/utilities" as *;

@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import configStore from "./store";
 
 import "./app.scss";
+import "./tailwind.scss";
 
 const store = configStore();
 
