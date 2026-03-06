@@ -26,6 +26,7 @@ export default defineAppConfig({
     "pages/industryDynamics/index",
     "pages/memberUnit/memberUnitPicture/index",
     "pages/shippingSchedule/index",
+    "pages/shippingSchedule/shippingScheduleDetail/index",
   ],
   permission: {
     "scope.writeStorage": {

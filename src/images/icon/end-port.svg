@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>icon/终</title>
+    <defs>
+        <circle id="path-1" cx="9" cy="9" r="9"></circle>
+    </defs>
+    <g id="船期查询" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="02-船期查询" transform="translate(-22, -178)">
+            <g id="编组" transform="translate(10, 100)">
+                <g id="icon/终" transform="translate(12, 78)">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use id="蒙版" fill="#1677FF" xlink:href="#path-1"></use>
+                    <text id="终" mask="url(#mask-2)" font-family="PingFangSC-Semibold, PingFang SC" font-size="11" font-weight="500" fill="#FFFFFF">
+                        <tspan x="3.5" y="13">终</tspan>
+                    </text>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

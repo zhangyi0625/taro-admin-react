@@ -11,7 +11,6 @@ import Taro from "@tarojs/taro";
 import BannerImg from "../../images/banner.png";
 import ArrowRight from "../../images/icon/arrow-icon.svg";
 import defaultLogo from "../../images/icon/default-logo.svg";
-
 import type { MemberUnitDetailType } from "../../service/memberUnit/memberUnitModel";
 import { getIndustryNewsList } from "../../service/industry-trends/industry-trendsApi";
 import { getMemberUnitList } from "../../service/memberUnit/memberUnitApi";

@@ -30,4 +30,6 @@ export interface PortAdvantageType {
   localName: string;
   name: string;
   unlocode: string;
+  cnName: string;
+  enName: string;
 }

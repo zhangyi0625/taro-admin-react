@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="56px" height="5px" viewBox="0 0 56 5" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>icon/航线/到达长</title>
+    <g id="船期查询" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="04-详细船期" transform="translate(-160, -301)" fill="#BFC2CC">
+            <g id="编组-3" transform="translate(10, 241)">
+                <g id="icon/航线/到达长" transform="translate(150, 60)">
+                    <path d="M0,5 L0,3 L49,3 L49,0 L56,5 L0,5 Z" id="形状结合"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
