@@ -221,10 +221,12 @@ const MemberUnitSearchFilter = React.forwardRef<
           </View>
         ))}
         <View
-          className="inline-flex memberUnit-filter-collapse"
+          className="flex justify-center w-full align-center memberUnit-filter-collapse"
           onClick={() => setIsCollapse(!isCollapse)}
         >
-          <Text className="">{isCollapse ? "展开更多查找条件" : "收起"}</Text>
+          <Text className="text-center">
+            {isCollapse ? "展开更多查找条件" : "收起"}
+          </Text>
           <Image className="arrow-icon" src={isCollapse ? Expand : Collapse} />
         </View>
       </View>

@@ -27,6 +27,8 @@ export default defineAppConfig({
     "pages/memberUnit/memberUnitPicture/index",
     "pages/shippingSchedule/index",
     "pages/shippingSchedule/shippingScheduleDetail/index",
+    "pages/privacy/index",
+    "pages/user-protocol/index",
   ],
   permission: {
     "scope.writeStorage": {

@@ -73,4 +73,27 @@
       padding: 6rpx 0;
     }
   }
+  .privacy {
+    display: flex;
+    align-items: center;
+    font-size: 28rpx;
+    color: #909399;
+    margin-top: 400px;
+    white-space: nowrap;
+    .text {
+      color: #1677ff;
+      margin: 0 2rpx;
+    }
+    .radio-small {
+      transform: scale(0.8);
+      // 针对小程序端的样式
+      radio {
+        transform: scale(0.8);
+      }
+      // 针对 H5 端的样式
+      input[type="radio"] {
+        transform: scale(0.8);
+      }
+    }
+  }
 }

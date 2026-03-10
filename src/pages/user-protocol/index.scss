@@ -1,0 +1,34 @@
+.default-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.default-text text {
+  color: #333;
+  font-size: 28px;
+  line-height: 46rpx;
+}
+
+.strong-text {
+  display: flex;
+  flex-direction: column;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.strong-text text {
+  color: #333;
+  line-height: 46rpx;
+}
+
+.title-text {
+  display: flex;
+  flex-direction: column;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.title-text text {
+  color: #333;
+  line-height: 100rpx;
+}

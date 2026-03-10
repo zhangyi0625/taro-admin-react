@@ -1,4 +1,4 @@
-import { View, Text, Image, Input, Button } from "@tarojs/components";
+import { View, Text, Image, Input, Button, Radio } from "@tarojs/components";
 import "./index.scss";
 import Taro, { useDidShow } from "@tarojs/taro";
 import Logo from "../../images/logo.png";
@@ -25,6 +25,8 @@ const Login: React.FC = () => {
     code: "",
     password: "",
   });
+
+  const [isAgree, setIsAgree] = useState<boolean>(false);
 
   const [isFirstLogin, setIsFirstLogin] = useState<boolean>(false);
 
@@ -70,6 +72,14 @@ const Login: React.FC = () => {
         });
         return;
       }
+    }
+    if (!isAgree) {
+      Taro.showToast({
+        title: "请先同意用户服务协议和隐私保护协议",
+        icon: "none",
+      });
+      setIsAgree(true);
+      return;
     }
     setLoading(true);
     try {
@@ -262,6 +272,28 @@ const Login: React.FC = () => {
             一键登录
           </Button>
         )}
+      </View>
+      <View className="privacy">
+        <Radio
+          checked={isAgree}
+          color="#167fff"
+          onChange={() => setIsAgree(!isAgree)}
+          className="radio-small"
+        ></Radio>
+        已阅读并同意
+        <Text
+          className="text"
+          onClick={() => Taro.navigateTo({ url: "/pages/user-protocol/index" })}
+        >
+          《用户服务协议》
+        </Text>
+        和
+        <Text
+          className="text"
+          onClick={() => Taro.navigateTo({ url: "/pages/privacy/index" })}
+        >
+          《隐私保护协议》
+        </Text>
       </View>
     </View>
   );
